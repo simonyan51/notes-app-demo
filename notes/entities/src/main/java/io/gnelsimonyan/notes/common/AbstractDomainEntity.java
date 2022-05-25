@@ -21,7 +21,11 @@ public abstract class AbstractDomainEntity implements AbstractDomain {
         createdAt = LocalDateTime.now();
     }
 
-    public AbstractDomainEntity(Long id, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public AbstractDomainEntity(
+            final Long id,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt
+    ) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

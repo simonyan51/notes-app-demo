@@ -22,7 +22,7 @@ final class UserImpl extends AbstractDomainEntity implements User {
 
     private final List<Note> notes;
 
-    UserImpl(String email, String password) {
+    UserImpl(final String email, final String password) {
         super();
         this.email = email;
         this.password = password;
@@ -30,12 +30,12 @@ final class UserImpl extends AbstractDomainEntity implements User {
     }
 
     UserImpl(
-            Long id,
-            String email,
-            String password,
-            List<Note> notes,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt
+            final Long id,
+            final String email,
+            final String password,
+            final List<Note> notes,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt
     ) {
         super(id, createdAt, updatedAt);
         this.email = email;
@@ -55,7 +55,7 @@ final class UserImpl extends AbstractDomainEntity implements User {
         return notes;
     }
 
-    public Note findNoteById(long noteId) {
+    public Note findNoteById(final long noteId) {
         return notes.stream()
                 .filter(note -> note.id() == noteId)
                 .findFirst()

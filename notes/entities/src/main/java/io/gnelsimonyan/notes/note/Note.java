@@ -9,37 +9,37 @@ public interface Note extends AbstractDomain {
 
     String title();
 
-    String note();
+    String text();
 
     void changeTitle(String title);
 
-    void changeNote(String note);
+    void changeText(String text);
 
     static Note of(
-            Long userId,
-            String title,
-            String note
+            final Long userId,
+            final String title,
+            final String text
     ) {
         return new NoteImpl(
                 userId,
                 title,
-                note
+                text
         );
     }
 
     static Note of(
-            Long id,
-            Long userId,
-            String title,
-            String note,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt
+            final Long id,
+            final Long userId,
+            final String title,
+            final String text,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt
     ) {
         return new NoteImpl(
                 id,
                 userId,
                 title,
-                note,
+                text,
                 createdAt,
                 updatedAt
         );

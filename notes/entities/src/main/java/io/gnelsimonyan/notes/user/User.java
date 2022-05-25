@@ -15,17 +15,17 @@ public interface User extends AbstractDomain {
 
     Note findNoteById(long noteId);
 
-    static User of(String email, String password) {
+    static User of(final String email, final String password) {
         return new UserImpl(email, password);
     }
 
     static User of(
-            Long id,
-            String email,
-            String password,
-            List<Note> notes,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt
+            final Long id,
+            final String email,
+            final String password,
+            final List<Note> notes,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt
     ) {
         return new UserImpl(
                 id,

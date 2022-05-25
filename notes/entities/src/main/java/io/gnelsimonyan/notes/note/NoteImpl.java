@@ -17,28 +17,31 @@ final class NoteImpl extends AbstractDomainEntity implements Note {
 
     private String title;
 
-    private String note;
+    private String text;
 
-
-    NoteImpl(Long userId, String title, String note) {
+    NoteImpl(
+            final Long userId,
+            final String title,
+            final String text
+    ) {
         super();
         this.userId = userId;
         this.title = title;
-        this.note = note;
+        this.text = text;
     }
 
     NoteImpl(
-            Long id,
-            Long userId,
-            String title,
-            String note,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt
+            final Long id,
+            final Long userId,
+            final String title,
+            final String text,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt
     ) {
         super(id, createdAt, updatedAt);
         this.userId = userId;
         this.title = title;
-        this.note = note;
+        this.text = text;
     }
 
     public Long userId() {
@@ -49,17 +52,17 @@ final class NoteImpl extends AbstractDomainEntity implements Note {
         return title;
     }
 
-    public String note() {
-        return note;
+    public String text() {
+        return text;
     }
 
-    public void changeTitle(String title) {
+    public void changeTitle(final String title) {
         this.title = title;
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void changeNote(String note) {
-        this.note = note;
+    public void changeText(final String text) {
+        this.text = text;
         this.updatedAt = LocalDateTime.now();
     }
 
@@ -71,7 +74,7 @@ final class NoteImpl extends AbstractDomainEntity implements Note {
                 ", updatedAt=" + updatedAt +
                 ", userId=" + userId +
                 ", title='" + title + '\'' +
-                ", note='" + note + '\'' +
+                ", note='" + text + '\'' +
                 '}';
     }
 }
