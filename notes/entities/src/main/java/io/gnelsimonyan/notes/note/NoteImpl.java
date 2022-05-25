@@ -5,13 +5,13 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.domain;
+package io.gnelsimonyan.notes.note;
 
-import io.gnelsimonyan.notes.common.AbstractDomain;
+import io.gnelsimonyan.notes.common.AbstractDomainEntity;
 
 import java.time.LocalDateTime;
 
-public final class Note extends AbstractDomain {
+final class NoteImpl extends AbstractDomainEntity implements Note {
 
     private final Long userId;
 
@@ -20,14 +20,14 @@ public final class Note extends AbstractDomain {
     private String note;
 
 
-    public Note(Long userId, String title, String note) {
+    NoteImpl(Long userId, String title, String note) {
         super();
         this.userId = userId;
         this.title = title;
         this.note = note;
     }
 
-    public Note(
+    NoteImpl(
             Long id,
             Long userId,
             String title,

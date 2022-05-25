@@ -5,15 +5,16 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.domain;
+package io.gnelsimonyan.notes.user;
 
-import io.gnelsimonyan.notes.common.AbstractDomain;
+import io.gnelsimonyan.notes.common.AbstractDomainEntity;
+import io.gnelsimonyan.notes.note.Note;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User extends AbstractDomain {
+final class UserImpl extends AbstractDomainEntity implements User {
 
     private String email;
 
@@ -21,19 +22,20 @@ public class User extends AbstractDomain {
 
     private List<Note> notes;
 
-    public User(String email, String password) {
+    UserImpl(String email, String password) {
+        super();
         this.email = email;
         this.password = password;
         this.notes = new ArrayList<>();
     }
 
-    public User(
+    UserImpl(
             Long id,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt,
             String email,
             String password,
-            List<Note> notes
+            List<Note> notes,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
     ) {
         super(id, createdAt, updatedAt);
         this.email = email;
