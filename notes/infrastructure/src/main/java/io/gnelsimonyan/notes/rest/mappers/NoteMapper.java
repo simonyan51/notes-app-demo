@@ -7,10 +7,12 @@
 
 package io.gnelsimonyan.notes.rest.mappers;
 
+import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
 import io.gnelsimonyan.notes.note.Note;
-import io.gnelsimonyan.notes.rest.dtos.NoteResponse;
+import io.gnelsimonyan.notes.rest.dtos.note.NoteResponse;
+import io.gnelsimonyan.notes.rest.dtos.note.SaveNoteRequest;
 
-public interface NotesResponseMapper {
+public interface NoteMapper {
     static NoteResponse mapNoteToNoteResponse(Note note) {
         return new NoteResponse(
                 note.id(),
@@ -18,6 +20,17 @@ public interface NotesResponseMapper {
                 note.text(),
                 note.createdAt(),
                 note.updatedAt()
+        );
+    }
+
+    static SaveUserNoteParams mapNoteRequestToSaveUserNoteParams(
+            long userId,
+            SaveNoteRequest createNoteRequest
+    ) {
+        return SaveUserNoteParams.of(
+                userId,
+                createNoteRequest.title(),
+                createNoteRequest.text()
         );
     }
 }

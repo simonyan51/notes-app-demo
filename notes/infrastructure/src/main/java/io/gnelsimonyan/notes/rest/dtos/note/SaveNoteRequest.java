@@ -1,9 +1,27 @@
 /*
-* Created by Gnel Simonyan
-* Created on 25/05/2022 16:50
-*
-* Copyright (c) 2022 PicsArt.Inc
-*/
+ * Created by Gnel Simonyan
+ * Created on 25/05/2022 16:50
+ *
+ * Copyright (c) 2022 PicsArt.Inc
+ */
 
-package io.gnelsimonyan.notes.rest.dtos;public class SaveNoteRequest {
+package io.gnelsimonyan.notes.rest.dtos.note;
+
+public abstract class SaveNoteRequest {
+    protected final String title;
+
+    protected final String text;
+
+    public SaveNoteRequest(String title, String text) {
+        this.title = title;
+        this.text = text;
+    }
+
+    public String title() {
+        return title;
+    }
+
+    public String text() {
+        return text;
+    }
 }
