@@ -13,6 +13,8 @@ public interface User extends AbstractDomain {
 
     List<Note> notes();
 
+    Note findNoteById(long noteId);
+
     static User of(String email, String password) {
         return new UserImpl(email, password);
     }

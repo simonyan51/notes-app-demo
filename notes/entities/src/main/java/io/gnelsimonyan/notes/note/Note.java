@@ -18,11 +18,13 @@ public interface Note extends AbstractDomain {
     static Note of(
             Long userId,
             String title,
-            String note) {
+            String note
+    ) {
         return new NoteImpl(
                 userId,
                 title,
-                note);
+                note
+        );
     }
 
     static Note of(
@@ -31,13 +33,15 @@ public interface Note extends AbstractDomain {
             String title,
             String note,
             LocalDateTime createdAt,
-            LocalDateTime updatedAt) {
+            LocalDateTime updatedAt
+    ) {
         return new NoteImpl(
                 id,
                 userId,
                 title,
                 note,
                 createdAt,
-                updatedAt);
+                updatedAt
+        );
     }
 }

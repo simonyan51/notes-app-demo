@@ -63,4 +63,15 @@ final class NoteImpl extends AbstractDomainEntity implements Note {
         this.updatedAt = LocalDateTime.now();
     }
 
+    @Override
+    public String toString() {
+        return "Note {" +
+                "id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

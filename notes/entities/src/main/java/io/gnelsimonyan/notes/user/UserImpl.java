@@ -16,11 +16,11 @@ import java.util.List;
 
 final class UserImpl extends AbstractDomainEntity implements User {
 
-    private String email;
+    private final String email;
 
-    private String password;
+    private final String password;
 
-    private List<Note> notes;
+    private final List<Note> notes;
 
     UserImpl(String email, String password) {
         super();
@@ -53,5 +53,24 @@ final class UserImpl extends AbstractDomainEntity implements User {
 
     public List<Note> notes() {
         return notes;
+    }
+
+    public Note findNoteById(long noteId) {
+        return notes.stream()
+                .filter(note -> note.id() == noteId)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public String toString() {
+        return "User {" +
+                "id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", notes=" + notes +
+                '}';
     }
 }
