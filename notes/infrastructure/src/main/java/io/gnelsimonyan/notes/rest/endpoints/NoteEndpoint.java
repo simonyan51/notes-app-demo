@@ -11,11 +11,16 @@ import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.UpdateUserNoteInputBoundary;
+import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
 import io.gnelsimonyan.notes.rest.dtos.NoteResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.gnelsimonyan.notes.rest.mappers.NotesResponseMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("v1/notes")
+import java.util.List;
+
+@RestController
+@RequestMapping("v1/notes")
 public class NoteEndpoint {
 
     private final FindUserNoteInputBoundary findUserNoteInputBoundary;
@@ -39,7 +44,22 @@ public class NoteEndpoint {
     }
 
     @GetMapping
-    public NoteResponse getNotes() {
+    public ResponseEntity<List<NoteResponse>> getNotes() {
+        List<NoteResponse> noteResponseList = findUserNoteInputBoundary.findUserNotes(null)
+                .stream()
+                .map(NotesResponseMapper::mapNoteToNoteResponse)
+                .toList();
 
+        return ResponseEntity.ok(noteResponseList);
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<NoteResponse> getNote(@PathVariable Long noteId) {
+        NoteResponse noteResponse = NotesResponseMapper.mapNoteToNoteResponse(
+                findUserNoteInputBoundary.findUserNote(noteId, null)
+        );
+
+        return ResponseEntity.ok(noteResponse);
+    }
+
 }

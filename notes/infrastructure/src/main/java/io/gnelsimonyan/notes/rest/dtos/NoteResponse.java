@@ -2,38 +2,22 @@ package io.gnelsimonyan.notes.rest.dtos;
 
 import java.time.LocalDateTime;
 
-public interface NoteResponse {
-    Long id();
+public class NoteResponse {
+    private final Long id;
 
-    String title();
+    private final String title;
 
-    String text();
+    private final String text;
 
-    LocalDateTime createdAt();
+    private final LocalDateTime createdAt;
 
-    LocalDateTime updatedAt();
+    private final LocalDateTime updatedAt;
 
-    static NoteResponse of(
-           final Long id,
-           final String title,
-           final String text,
-           final LocalDateTime createdAt,
-           final LocalDateTime updatedAt
-    ) {
-        return new NoteResponseImpl(
-                id,
-                title,
-                text,
-                createdAt,
-                updatedAt
-        );
+    public NoteResponse(Long id, String title, String text, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
-
-    record NoteResponseImpl(
-            Long id,
-            String title,
-            String text,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt
-    ) implements NoteResponse {}
 }
