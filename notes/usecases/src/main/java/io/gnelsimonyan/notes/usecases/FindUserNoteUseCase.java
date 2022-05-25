@@ -18,7 +18,7 @@ public class FindUserNoteUseCase implements FindUserNoteInputBoundary {
 
     private final FindUserNoteOutputBoundary findUserNoteOutputBoundary;
 
-    public FindUserNoteUseCase(FindUserNoteOutputBoundary findUserNoteOutputBoundary) {
+    public FindUserNoteUseCase(final FindUserNoteOutputBoundary findUserNoteOutputBoundary) {
         this.findUserNoteOutputBoundary = findUserNoteOutputBoundary;
     }
 
