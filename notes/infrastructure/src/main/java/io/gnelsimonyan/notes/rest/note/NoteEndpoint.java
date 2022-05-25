@@ -11,11 +11,10 @@ import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.UpdateUserNoteInputBoundary;
-import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
 import io.gnelsimonyan.notes.note.Note;
 import io.gnelsimonyan.notes.rest.dtos.note.CreateNoteRequest;
 import io.gnelsimonyan.notes.rest.dtos.note.NoteResponse;
-import io.gnelsimonyan.notes.rest.dtos.note.SaveNoteRequest;
+import io.gnelsimonyan.notes.rest.dtos.note.UpdateNoteRequest;
 import io.gnelsimonyan.notes.rest.mappers.NoteMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,11 +57,9 @@ public class NoteEndpoint {
 
     @GetMapping("{id}")
     public ResponseEntity<NoteResponse> getNote(@PathVariable("id") Long noteId) {
-        NoteResponse noteResponse = NoteMapper.mapNoteToNoteResponse(
-                findUserNoteInputBoundary.findUserNote(noteId, null)
-        );
+        Note note = findUserNoteInputBoundary.findUserNote(noteId, null);
 
-        return ResponseEntity.ok(noteResponse);
+        return ResponseEntity.ok(NoteMapper.mapNoteToNoteResponse(note));
     }
 
     @PostMapping
@@ -77,7 +74,7 @@ public class NoteEndpoint {
     @PutMapping("{id}")
     public ResponseEntity<NoteResponse> updateNote(
             @PathVariable("id") long noteId,
-            @RequestBody SaveNoteRequest updateNoteRequest
+            @RequestBody UpdateNoteRequest updateNoteRequest
     ) {
         Note updatedNote = updateUserNoteInputBoundary.updateUserNote(
                 noteId,
