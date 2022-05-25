@@ -18,7 +18,23 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.gnelsimonyan</groupId>
+            <artifactId>usecases</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>io.gnelsimonyan</groupId>
+            <artifactId>entities</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.5</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

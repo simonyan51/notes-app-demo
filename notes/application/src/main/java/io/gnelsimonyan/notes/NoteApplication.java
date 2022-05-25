@@ -5,12 +5,10 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.application;
+package io.gnelsimonyan.notes;
 
-import io.gnelsimonyan.notes.InfrastructureConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 public class NoteApplication {
