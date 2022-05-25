@@ -5,7 +5,7 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.rest.dtos.note;
+package io.gnelsimonyan.notes.rest.note.dtos;
 
 public abstract class SaveNoteRequest {
     protected final String title;

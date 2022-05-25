@@ -5,17 +5,16 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.rest.endpoints;
+package io.gnelsimonyan.notes.rest.note;
 
 import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.UpdateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.note.Note;
-import io.gnelsimonyan.notes.rest.dtos.note.CreateNoteRequest;
-import io.gnelsimonyan.notes.rest.dtos.note.NoteResponse;
-import io.gnelsimonyan.notes.rest.dtos.note.UpdateNoteRequest;
-import io.gnelsimonyan.notes.rest.mappers.NoteMapper;
+import io.gnelsimonyan.notes.rest.note.dtos.CreateNoteRequest;
+import io.gnelsimonyan.notes.rest.note.dtos.NoteResponse;
+import io.gnelsimonyan.notes.rest.note.dtos.UpdateNoteRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +48,7 @@ public class NoteEndpoint {
     public ResponseEntity<List<NoteResponse>> getNotes() {
         List<NoteResponse> noteResponseList = findUserNoteInputBoundary.findUserNotes(null)
                 .stream()
-                .map(NoteMapper::mapNoteToNoteResponse)
+                .map(NoteModelMapper::mapNoteToNoteResponse)
                 .toList();
 
         return ResponseEntity.ok(noteResponseList);
@@ -59,16 +58,16 @@ public class NoteEndpoint {
     public ResponseEntity<NoteResponse> getNote(@PathVariable("id") Long noteId) {
         Note note = findUserNoteInputBoundary.findUserNote(noteId, null);
 
-        return ResponseEntity.ok(NoteMapper.mapNoteToNoteResponse(note));
+        return ResponseEntity.ok(NoteModelMapper.mapNoteToNoteResponse(note));
     }
 
     @PostMapping
     public ResponseEntity<NoteResponse> createNote(@RequestBody CreateNoteRequest createNoteRequest) {
         Note createdNote = createUserNoteInputBoundary.createUserNote(
-                NoteMapper.mapNoteRequestToSaveUserNoteParams(0, createNoteRequest)
+                NoteModelMapper.mapNoteRequestToSaveUserNoteParams(0, createNoteRequest)
         );
 
-        return ResponseEntity.ok(NoteMapper.mapNoteToNoteResponse(createdNote));
+        return ResponseEntity.ok(NoteModelMapper.mapNoteToNoteResponse(createdNote));
     }
 
     @PutMapping("{id}")
@@ -78,10 +77,10 @@ public class NoteEndpoint {
     ) {
         Note updatedNote = updateUserNoteInputBoundary.updateUserNote(
                 noteId,
-                NoteMapper.mapNoteRequestToSaveUserNoteParams(0, updateNoteRequest)
+                NoteModelMapper.mapNoteRequestToSaveUserNoteParams(0, updateNoteRequest)
         );
 
-        return ResponseEntity.ok(NoteMapper.mapNoteToNoteResponse(updatedNote));
+        return ResponseEntity.ok(NoteModelMapper.mapNoteToNoteResponse(updatedNote));
     }
 
     @DeleteMapping("{id}")

@@ -5,14 +5,14 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.rest.mappers;
+package io.gnelsimonyan.notes.rest.note;
 
 import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
 import io.gnelsimonyan.notes.note.Note;
-import io.gnelsimonyan.notes.rest.dtos.note.NoteResponse;
-import io.gnelsimonyan.notes.rest.dtos.note.SaveNoteRequest;
+import io.gnelsimonyan.notes.rest.note.dtos.NoteResponse;
+import io.gnelsimonyan.notes.rest.note.dtos.SaveNoteRequest;
 
-public interface NoteMapper {
+public interface NoteModelMapper {
     static NoteResponse mapNoteToNoteResponse(Note note) {
         return new NoteResponse(
                 note.id(),

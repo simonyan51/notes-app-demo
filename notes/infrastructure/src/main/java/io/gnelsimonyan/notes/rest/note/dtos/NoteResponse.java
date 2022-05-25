@@ -1,4 +1,4 @@
-package io.gnelsimonyan.notes.rest.dtos.note;
+package io.gnelsimonyan.notes.rest.note.dtos;
 
 import java.time.LocalDateTime;
 

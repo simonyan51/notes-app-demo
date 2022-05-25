@@ -5,7 +5,7 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.rest.dtos.note;
+package io.gnelsimonyan.notes.rest.note.dtos;
 
 public class UpdateNoteRequest extends SaveNoteRequest {
     public UpdateNoteRequest(String title, String text) {

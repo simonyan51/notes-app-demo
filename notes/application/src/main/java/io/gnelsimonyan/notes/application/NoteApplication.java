@@ -7,10 +7,15 @@
 
 package io.gnelsimonyan.notes.application;
 
+import io.gnelsimonyan.notes.InfrastructureConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
+@Import({
+        InfrastructureConfiguration.class
+})
 public class NoteApplication {
 
     public static void main(String[] args) {
