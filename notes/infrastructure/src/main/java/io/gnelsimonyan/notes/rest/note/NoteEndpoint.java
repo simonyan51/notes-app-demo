@@ -48,43 +48,43 @@ public class NoteEndpoint {
     public ResponseEntity<List<NoteResponse>> getNotes() {
         List<NoteResponse> noteResponseList = findUserNoteInputBoundary.findUserNotes(null)
                 .stream()
-                .map(NoteModelMapper::mapNoteToNoteResponse)
+                .map(NoteDtoMapper::mapNoteToNoteResponse)
                 .toList();
 
         return ResponseEntity.ok(noteResponseList);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<NoteResponse> getNote(@PathVariable("id") Long noteId) {
+    public ResponseEntity<NoteResponse> getNote(@PathVariable("id") final Long noteId) {
         Note note = findUserNoteInputBoundary.findUserNote(noteId, null);
 
-        return ResponseEntity.ok(NoteModelMapper.mapNoteToNoteResponse(note));
+        return ResponseEntity.ok(NoteDtoMapper.mapNoteToNoteResponse(note));
     }
 
     @PostMapping
-    public ResponseEntity<NoteResponse> createNote(@RequestBody CreateNoteRequest createNoteRequest) {
+    public ResponseEntity<NoteResponse> createNote(@RequestBody final CreateNoteRequest createNoteRequest) {
         Note createdNote = createUserNoteInputBoundary.createUserNote(
-                NoteModelMapper.mapNoteRequestToSaveUserNoteParams(0, createNoteRequest)
+                NoteDtoMapper.mapNoteRequestToSaveUserNoteParams(0, createNoteRequest)
         );
 
-        return ResponseEntity.ok(NoteModelMapper.mapNoteToNoteResponse(createdNote));
+        return ResponseEntity.ok(NoteDtoMapper.mapNoteToNoteResponse(createdNote));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<NoteResponse> updateNote(
-            @PathVariable("id") long noteId,
-            @RequestBody UpdateNoteRequest updateNoteRequest
+            @PathVariable("id") final long noteId,
+            @RequestBody final UpdateNoteRequest updateNoteRequest
     ) {
         Note updatedNote = updateUserNoteInputBoundary.updateUserNote(
                 noteId,
-                NoteModelMapper.mapNoteRequestToSaveUserNoteParams(0, updateNoteRequest)
+                NoteDtoMapper.mapNoteRequestToSaveUserNoteParams(0, updateNoteRequest)
         );
 
-        return ResponseEntity.ok(NoteModelMapper.mapNoteToNoteResponse(updatedNote));
+        return ResponseEntity.ok(NoteDtoMapper.mapNoteToNoteResponse(updatedNote));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteNote(@PathVariable("id") Long noteId) {
+    public ResponseEntity deleteNote(@PathVariable("id") final Long noteId) {
         removeUserNoteInputBoundary.removeUserNote(noteId, null);
 
         return ResponseEntity.ok(null);

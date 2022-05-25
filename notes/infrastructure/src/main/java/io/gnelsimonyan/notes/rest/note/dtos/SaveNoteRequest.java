@@ -7,9 +7,15 @@
 
 package io.gnelsimonyan.notes.rest.note.dtos;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
+
 public abstract class SaveNoteRequest {
+    @NotEmpty
+    @Max(50)
     protected final String title;
 
+    @Max(1000)
     protected final String text;
 
     public SaveNoteRequest(String title, String text) {

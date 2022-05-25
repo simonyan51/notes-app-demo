@@ -12,8 +12,8 @@ import io.gnelsimonyan.notes.note.Note;
 import io.gnelsimonyan.notes.rest.note.dtos.NoteResponse;
 import io.gnelsimonyan.notes.rest.note.dtos.SaveNoteRequest;
 
-public interface NoteModelMapper {
-    static NoteResponse mapNoteToNoteResponse(Note note) {
+public interface NoteDtoMapper {
+    static NoteResponse mapNoteToNoteResponse(final Note note) {
         return new NoteResponse(
                 note.id(),
                 note.title(),
@@ -24,8 +24,8 @@ public interface NoteModelMapper {
     }
 
     static SaveUserNoteParams mapNoteRequestToSaveUserNoteParams(
-            long userId,
-            SaveNoteRequest createNoteRequest
+            final long userId,
+            final SaveNoteRequest createNoteRequest
     ) {
         return SaveUserNoteParams.of(
                 userId,
