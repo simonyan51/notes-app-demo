@@ -22,8 +22,6 @@ public class SignInUserUseCase implements SignInUserInputBoundary {
     @Override
     public boolean signIn(final SignInUserParams signInUserParams) {
         Assert.notNull(signInUserParams, "SignIn user parameters should be provided");
-        Assert.notEmpty(signInUserParams.email(), "Email must be provided");
-        Assert.notEmpty(signInUserParams.password(), "Password must be provided");
 
 
         return false;
