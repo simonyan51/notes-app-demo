@@ -5,7 +5,7 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.rest.note;
+package io.gnelsimonyan.notes.rest.note.dtos;
 
 import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
 import io.gnelsimonyan.notes.note.Note;

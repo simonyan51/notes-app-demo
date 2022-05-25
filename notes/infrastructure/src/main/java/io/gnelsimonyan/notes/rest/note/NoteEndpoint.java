@@ -13,6 +13,7 @@ import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.UpdateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.note.Note;
 import io.gnelsimonyan.notes.rest.note.dtos.CreateNoteRequest;
+import io.gnelsimonyan.notes.rest.note.dtos.NoteDtoMapper;
 import io.gnelsimonyan.notes.rest.note.dtos.NoteResponse;
 import io.gnelsimonyan.notes.rest.note.dtos.UpdateNoteRequest;
 import org.springframework.http.ResponseEntity;

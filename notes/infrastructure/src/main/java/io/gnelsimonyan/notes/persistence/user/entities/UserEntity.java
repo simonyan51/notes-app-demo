@@ -7,14 +7,14 @@
 
 package io.gnelsimonyan.notes.persistence.user.entities;
 
-import io.gnelsimonyan.notes.common.AbstractDomainEntity;
+import io.gnelsimonyan.notes.persistence.common.AbstractEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
-public class UserEntity extends AbstractDomainEntity {
+public class UserEntity extends AbstractEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -30,39 +30,22 @@ public class UserEntity extends AbstractDomainEntity {
     }
 
     public UserEntity(
-            final Long id,
-            final LocalDateTime createdAt,
-            final LocalDateTime updatedAt,
-            final Long id1,
-            final String email,
-            final String password) {
+            Long id,
+            String email,
+            String password,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
+    ) {
         super(id, createdAt, updatedAt);
-        this.id = id1;
         this.email = email;
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
+    public String email() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
+    public String password() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
