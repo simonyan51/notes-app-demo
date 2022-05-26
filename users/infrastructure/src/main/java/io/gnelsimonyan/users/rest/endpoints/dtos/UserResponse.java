@@ -1,22 +1,24 @@
-package io.gnelsimonyan.notes.rest.dtos;
+package io.gnelsimonyan.users.rest.endpoints.dtos;
 
 import java.time.LocalDateTime;
 
-public class NoteResponse {
+public class UserResponse {
     private final Long id;
 
-    private final String title;
-
-    private final String text;
+    private final String email;
 
     private final LocalDateTime createdAt;
 
     private final LocalDateTime updatedAt;
 
-    public NoteResponse(Long id, String title, String text, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserResponse(
+            final Long id,
+            final String email,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt
+    ) {
         this.id = id;
-        this.title = title;
-        this.text = text;
+        this.email = email;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -25,12 +27,8 @@ public class NoteResponse {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getText() {
-        return text;
+    public String getEmail() {
+        return email;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -41,3 +39,4 @@ public class NoteResponse {
         return updatedAt;
     }
 }
+

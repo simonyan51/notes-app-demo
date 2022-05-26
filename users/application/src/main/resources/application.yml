@@ -1,6 +1,9 @@
 server:
   port: 9000
 
+jwt:
+  secret: test
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/notes

@@ -1,24 +1,35 @@
 package io.gnelsimonyan.users.usecases;
 
-import io.gnelsimonyan.users.User;
+import io.gnelsimonyan.users.boundaries.output.SignInUserOutputBoundary;
+import io.gnelsimonyan.users.common.JWTUtils;
+import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.input.params.SignInUserParams;
-import io.gnelsimonyan.users.boundaries.output.SignInOutputBoundary;
+import io.gnelsimonyan.users.common.Assert;
 
 public class SignInUserUseCase implements SignInUserInputBoundary {
 
-    private final SignInOutputBoundary signInOutputBoundary;
+    private final SignInUserOutputBoundary signInUserOutputBoundary;
 
-    public SignInUserUseCase(final SignInOutputBoundary signInOutputBoundary) {
-        this.signInOutputBoundary = signInOutputBoundary;
+    private final JWTUtils jwtUtils;
+
+    public SignInUserUseCase(
+            final SignInUserOutputBoundary signInUserOutputBoundary,
+            final JWTUtils jwtUtils
+    ) {
+        this.signInUserOutputBoundary = signInUserOutputBoundary;
+        this.jwtUtils = jwtUtils;
     }
 
     @Override
-    public User signIn(final SignInUserParams params) {
-        User foundUser = signInOutputBoundary.findUserByEmail(params.email());
+    public String signIn(final SignInUserParams params) {
+        Assert.notNull(params, "Sign In params must be provided");
 
-        if (!foundUser.validatePassword(params.password())) throw new IllegalArgumentException("Invalid username or password");
+        User foundUser = signInUserOutputBoundary.authenticate(
+                params.email(),
+                params.password()
+        );
 
-        return foundUser;
+        return jwtUtils.generateToken(foundUser.email());
     }
 }

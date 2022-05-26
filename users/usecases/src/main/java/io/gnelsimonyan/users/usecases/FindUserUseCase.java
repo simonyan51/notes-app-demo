@@ -1,6 +1,6 @@
 package io.gnelsimonyan.users.usecases;
 
-import io.gnelsimonyan.users.User;
+import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.input.FindUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.output.FindUserOutputBoundary;
 import io.gnelsimonyan.users.common.Assert;
@@ -17,6 +17,10 @@ public class FindUserUseCase implements FindUserInputBoundary {
     public User findUserByEmail(final String email) {
         Assert.notEmpty(email, "Email must be provided");
 
-        return findUserOutputBoundary.findUserByEmail(email);
+        User user = findUserOutputBoundary.findUserByEmail(email);
+
+        if (user == null) throw new IllegalArgumentException("User not found");
+
+        return user;
     }
 }

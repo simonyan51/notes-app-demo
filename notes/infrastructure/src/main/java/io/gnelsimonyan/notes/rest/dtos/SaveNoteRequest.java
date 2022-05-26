@@ -16,11 +16,11 @@ public abstract class SaveNoteRequest {
         this.text = text;
     }
 
-    public String title() {
+    public String getTitle() {
         return title;
     }
 
-    public String text() {
+    public String getText() {
         return text;
     }
 }

@@ -20,12 +20,12 @@ import org.springframework.context.annotation.Import;
 })
 public class NoteBoundariesConfiguration {
     @Bean
-    FindUserNoteInputBoundary findUserNoteInputBoundary(final FindUserNoteOutputBoundary findUserNoteOutputBoundary) {
+    public FindUserNoteInputBoundary findUserNoteInputBoundary(final FindUserNoteOutputBoundary findUserNoteOutputBoundary) {
         return new FindUserNoteUseCase(findUserNoteOutputBoundary);
     }
 
     @Bean
-    CreateUserNoteInputBoundary createUserNoteInputBoundary(
+    public CreateUserNoteInputBoundary createUserNoteInputBoundary(
             final FindUserOutputBoundary findUserOutputBoundary,
             final SaveNoteOutputBoundary saveNoteOutputBoundary
     ) {
@@ -33,7 +33,7 @@ public class NoteBoundariesConfiguration {
     }
 
     @Bean
-    UpdateUserNoteInputBoundary updateUserNoteInputBoundary(
+    public UpdateUserNoteInputBoundary updateUserNoteInputBoundary(
             final FindUserNoteOutputBoundary findUserNoteOutputBoundary,
             final SaveNoteOutputBoundary saveNoteOutputBoundary,
             final TransactionManagerOutputBoundary transactionManagerOutputBoundary
@@ -46,7 +46,7 @@ public class NoteBoundariesConfiguration {
     }
 
     @Bean
-    RemoveUserNoteInputBoundary removeUserNoteInputBoundary(
+    public RemoveUserNoteInputBoundary removeUserNoteInputBoundary(
             final RemoveNoteOutputBoundary removeNoteOutputBoundary,
             final FindUserNoteOutputBoundary findUserNoteOutputBoundary
     ) {

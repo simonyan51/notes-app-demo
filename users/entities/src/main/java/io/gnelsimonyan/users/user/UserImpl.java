@@ -1,4 +1,4 @@
-package io.gnelsimonyan.users;
+package io.gnelsimonyan.users.user;
 
 import io.gnelsimonyan.users.common.AbstractDomainEntity;
 
@@ -36,11 +36,6 @@ final class UserImpl extends AbstractDomainEntity implements User {
     @Override
     public String password() {
         return password;
-    }
-
-    @Override
-    public boolean validatePassword(String password) {
-        return true;
     }
 
     @Override

@@ -1,7 +1,9 @@
-package io.gnelsimonyan.notes.rest.dtos;
+package io.gnelsimonyan.notes.rest.mappers;
 
 import io.gnelsimonyan.notes.Note;
 import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
+import io.gnelsimonyan.notes.rest.dtos.NoteResponse;
+import io.gnelsimonyan.notes.rest.dtos.SaveNoteRequest;
 
 public interface NoteDtoMapper {
     static NoteResponse mapNoteToNoteResponse(final Note note) {
@@ -20,8 +22,8 @@ public interface NoteDtoMapper {
     ) {
         return SaveUserNoteParams.of(
                 userId,
-                createNoteRequest.title(),
-                createNoteRequest.text()
+                createNoteRequest.getTitle(),
+                createNoteRequest.getText()
         );
     }
 }

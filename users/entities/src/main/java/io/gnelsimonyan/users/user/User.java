@@ -1,4 +1,4 @@
-package io.gnelsimonyan.users;
+package io.gnelsimonyan.users.user;
 
 import io.gnelsimonyan.users.common.AbstractDomain;
 
@@ -8,8 +8,6 @@ public interface User extends AbstractDomain {
     String email();
 
     String password();
-
-    boolean validatePassword(String password);
 
     static User of(final String email, final String password) {
         return new UserImpl(email, password);
