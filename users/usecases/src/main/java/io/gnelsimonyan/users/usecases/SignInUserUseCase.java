@@ -1,10 +1,3 @@
-/*
- * Created by Gnel Simonyan
- * Created on 26/05/2022 12:31
- *
- * Copyright (c) 2022 PicsArt.Inc
- */
-
 package io.gnelsimonyan.users.usecases;
 
 import io.gnelsimonyan.users.User;

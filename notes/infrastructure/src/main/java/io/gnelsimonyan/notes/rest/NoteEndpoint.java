@@ -1,10 +1,3 @@
-/*
- * Created by Gnel Simonyan
- * Created on 25/05/2022 15:21
- *
- * Copyright (c) 2022 PicsArt.Inc
- */
-
 package io.gnelsimonyan.notes.rest;
 
 import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
