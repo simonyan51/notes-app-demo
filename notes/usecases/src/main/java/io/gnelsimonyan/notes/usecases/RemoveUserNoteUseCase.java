@@ -11,7 +11,7 @@ import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.RemoveNoteOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
-import io.gnelsimonyan.notes.note.Note;
+import io.gnelsimonyan.notes.Note;
 
 public class RemoveUserNoteUseCase implements RemoveUserNoteInputBoundary {
 

@@ -8,7 +8,7 @@
 package io.gnelsimonyan.notes.usecases;
 
 import io.gnelsimonyan.notes.common.Assert;
-import io.gnelsimonyan.notes.note.Note;
+import io.gnelsimonyan.notes.Note;
 import io.gnelsimonyan.notes.user.User;
 import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;

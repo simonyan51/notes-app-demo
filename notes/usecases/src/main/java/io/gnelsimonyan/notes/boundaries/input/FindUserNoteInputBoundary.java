@@ -1,6 +1,6 @@
 package io.gnelsimonyan.notes.boundaries.input;
 
-import io.gnelsimonyan.notes.note.Note;
+import io.gnelsimonyan.notes.Note;
 
 import java.util.List;
 

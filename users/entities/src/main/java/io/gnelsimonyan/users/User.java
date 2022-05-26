@@ -1,19 +1,15 @@
-package io.gnelsimonyan.notes.user;
+package io.gnelsimonyan.users;
 
-import io.gnelsimonyan.notes.common.AbstractDomain;
-import io.gnelsimonyan.notes.Note;
+import io.gnelsimonyan.users.common.AbstractDomain;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public interface User extends AbstractDomain {
     String email();
 
     String password();
 
-    List<Note> notes();
-
-    Note findNoteById(long noteId);
+    boolean validatePassword(String password);
 
     static User of(final String email, final String password) {
         return new UserImpl(email, password);
@@ -23,7 +19,6 @@ public interface User extends AbstractDomain {
             final Long id,
             final String email,
             final String password,
-            final List<Note> notes,
             final LocalDateTime createdAt,
             final LocalDateTime updatedAt
     ) {
@@ -31,7 +26,6 @@ public interface User extends AbstractDomain {
                 id,
                 email,
                 password,
-                notes,
                 createdAt,
                 updatedAt
         );

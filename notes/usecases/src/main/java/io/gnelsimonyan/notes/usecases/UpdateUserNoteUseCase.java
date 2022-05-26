@@ -13,7 +13,7 @@ import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.SaveNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.TransactionManagerOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
-import io.gnelsimonyan.notes.note.Note;
+import io.gnelsimonyan.notes.Note;
 
 public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
 

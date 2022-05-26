@@ -5,14 +5,11 @@
  * Copyright (c) 2022 PicsArt.Inc
  */
 
-package io.gnelsimonyan.notes.user;
+package io.gnelsimonyan.users;
 
-import io.gnelsimonyan.notes.common.AbstractDomainEntity;
-import io.gnelsimonyan.notes.Note;
+import io.gnelsimonyan.users.common.AbstractDomainEntity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 final class UserImpl extends AbstractDomainEntity implements User {
 
@@ -20,46 +17,37 @@ final class UserImpl extends AbstractDomainEntity implements User {
 
     private final String password;
 
-    private final List<Note> notes;
-
     UserImpl(final String email, final String password) {
         super();
         this.email = email;
         this.password = password;
-        this.notes = new ArrayList<>();
     }
 
     UserImpl(
             final Long id,
             final String email,
             final String password,
-            final List<Note> notes,
             final LocalDateTime createdAt,
             final LocalDateTime updatedAt
     ) {
         super(id, createdAt, updatedAt);
         this.email = email;
         this.password = password;
-        this.notes = notes;
     }
 
+    @Override
     public String email() {
         return email;
     }
 
+    @Override
     public String password() {
         return password;
     }
 
-    public List<Note> notes() {
-        return notes;
-    }
-
-    public Note findNoteById(final long noteId) {
-        return notes.stream()
-                .filter(note -> note.id() == noteId)
-                .findFirst()
-                .orElse(null);
+    @Override
+    public boolean validatePassword(String password) {
+        return true;
     }
 
     @Override
@@ -70,7 +58,6 @@ final class UserImpl extends AbstractDomainEntity implements User {
                 ", updatedAt=" + updatedAt +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", notes=" + notes +
                 '}';
     }
 }
