@@ -1,6 +1,6 @@
 package io.gnelsimonyan.notes;
 
-import io.gnelsimonyan.notes.InfrastructureConfiguration;
+import io.gnelsimonyan.notes.configurations.InfrastructureConfiguration;
 import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;

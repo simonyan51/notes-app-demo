@@ -1,4 +1,4 @@
-package io.gnelsimonyan.notes;
+package io.gnelsimonyan.notes.configurations;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

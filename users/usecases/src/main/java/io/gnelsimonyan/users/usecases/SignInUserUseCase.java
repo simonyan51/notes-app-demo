@@ -9,7 +9,7 @@ public class SignInUserUseCase implements SignInUserInputBoundary {
 
     private final SignInOutputBoundary signInOutputBoundary;
 
-    public SignInUserUseCase(SignInOutputBoundary signInOutputBoundary) {
+    public SignInUserUseCase(final SignInOutputBoundary signInOutputBoundary) {
         this.signInOutputBoundary = signInOutputBoundary;
     }
 
