@@ -4,8 +4,30 @@ services:
   notes:
     build:
       context: ./notes/application
+    links: 
+      - db
+      - users
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/notes
+      - USERS_HOST=users
+      - USERS_PORT=9000
     ports:
       - 8080:8080
+
+  users:
+    build:
+      context: ./users/application
+    links: 
+      - db
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/users
+    ports:
+      - 9000:9000
+
   db:
     image: postgres
     restart: always
@@ -19,4 +41,4 @@ services:
 
 volumes:
   postgres-data:
-  
+
