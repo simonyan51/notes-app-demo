@@ -21,7 +21,6 @@
         <module>usecases</module>
         <module>application</module>
         <module>infrastructure</module>
-        <module>api-client</module>
     </modules>
 
     <dependencies>

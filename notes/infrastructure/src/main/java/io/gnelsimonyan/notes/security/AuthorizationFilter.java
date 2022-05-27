@@ -17,7 +17,7 @@ import java.util.Collections;
 
 @Component
 class AuthorizationFilter extends OncePerRequestFilter {
-    private static String AUTHORIZATION_HEADER = "Authorization";
+    private static final String AUTHORIZATION_HEADER = "Authorization";
 
     private final UserApiClient userApiClient;
 

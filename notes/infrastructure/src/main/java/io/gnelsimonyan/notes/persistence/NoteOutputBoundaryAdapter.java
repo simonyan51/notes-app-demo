@@ -15,8 +15,7 @@ import java.util.function.Supplier;
 class NoteOutputBoundaryAdapter implements
         FindUserNoteOutputBoundary,
         SaveNoteOutputBoundary,
-        RemoveNoteOutputBoundary,
-        TransactionManagerOutputBoundary {
+        RemoveNoteOutputBoundary {
 
     private final NoteRepository noteRepository;
 
@@ -50,11 +49,5 @@ class NoteOutputBoundaryAdapter implements
         NoteEntity createdNote = noteRepository.save(NoteEntityMapper.mapNoteToNoteEntity(noteToBeCreated));
 
         return NoteEntityMapper.mapNoteEntityToNote(createdNote);
-    }
-
-    @Override
-    @Transactional
-    public <T> T execute(final Supplier<T> supplier) {
-        return supplier.get();
     }
 }

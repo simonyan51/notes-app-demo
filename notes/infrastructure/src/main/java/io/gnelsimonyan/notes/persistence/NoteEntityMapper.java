@@ -18,7 +18,7 @@ interface NoteEntityMapper {
         return NoteEntity.of(
                 note.id(),
                 note.title(),
-                note.title(),
+                note.text(),
                 note.createdAt(),
                 note.updatedAt(),
                 note.userId()

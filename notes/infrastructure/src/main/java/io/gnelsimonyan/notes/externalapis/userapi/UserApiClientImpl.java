@@ -1,7 +1,6 @@
 package io.gnelsimonyan.notes.externalapis.userapi;
 
 import io.gnelsimonyan.notes.externalapis.common.HttpClientExecutor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,6 @@ class UserApiClientImpl implements UserApiClient {
 
     private final String userApiClientUrl;
 
-    @Autowired
     public UserApiClientImpl(
             @Value("${users.host}")
             final String userApiClientHost,
