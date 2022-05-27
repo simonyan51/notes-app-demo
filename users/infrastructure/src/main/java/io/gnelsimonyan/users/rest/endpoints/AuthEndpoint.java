@@ -12,6 +12,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("v1/auth")
 public class AuthEndpoint {
@@ -29,7 +31,7 @@ public class AuthEndpoint {
     }
 
     @PostMapping("sign-in")
-    public ResponseEntity<JwtTokenResponse> signIn(@RequestBody SignInRequest signInParamsRequest) {
+    public ResponseEntity<JwtTokenResponse> signIn(@RequestBody @Valid SignInRequest signInParamsRequest) {
         String accessToken = signInUserInputBoundary.signIn(
                 UserDtoMapper.mapSignInUserParamsRequestToSignInUserParams(signInParamsRequest)
         );
