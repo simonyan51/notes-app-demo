@@ -4,7 +4,7 @@ import io.gnelsimonyan.users.boundaries.input.FindUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.output.FindUserOutputBoundary;
 import io.gnelsimonyan.users.boundaries.output.SignInUserOutputBoundary;
-import io.gnelsimonyan.users.common.JWTUtils;
+import io.gnelsimonyan.users.common.TokenManager;
 import io.gnelsimonyan.users.configuration.InfrastructureConfiguration;
 import io.gnelsimonyan.users.usecases.FindUserUseCase;
 import io.gnelsimonyan.users.usecases.SignInUserUseCase;
@@ -18,7 +18,10 @@ import org.springframework.context.annotation.Import;
 public class UsersBoundariesConfiguration {
 
     @Value("${jwt.secret}")
-    private String secret;
+    private String jwtSecret;
+
+    @Value("${jwt.subject}")
+    private String jwtSubject;
 
     @Bean
     public FindUserInputBoundary findUserInputBoundary(FindUserOutputBoundary findUserOutputBoundary) {
@@ -28,16 +31,16 @@ public class UsersBoundariesConfiguration {
     @Bean
     public SignInUserInputBoundary signInUserInputBoundary(
             SignInUserOutputBoundary signInUserOutputBoundary,
-            JWTUtils jwtUtils
+            TokenManager tokenManager
     ) {
         return new SignInUserUseCase(
                 signInUserOutputBoundary,
-                jwtUtils
+                tokenManager
         );
     }
 
     @Bean
-    public JWTUtils jwtUtils() {
-        return new JWTUtils(secret);
+    public TokenManager tokenManager() {
+        return new TokenManager(jwtSubject, jwtSecret);
     }
 }

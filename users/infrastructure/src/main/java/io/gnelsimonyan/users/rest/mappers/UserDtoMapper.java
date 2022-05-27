@@ -1,4 +1,4 @@
-package io.gnelsimonyan.users.rest.endpoints.mappers;
+package io.gnelsimonyan.users.rest.mappers;
 
 import io.gnelsimonyan.users.rest.endpoints.dtos.SignInRequest;
 import io.gnelsimonyan.users.rest.endpoints.dtos.UserResponse;

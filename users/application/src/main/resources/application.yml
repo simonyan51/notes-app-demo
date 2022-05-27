@@ -3,6 +3,7 @@ server:
 
 jwt:
   secret: test
+  subject: user
 
 spring:
   datasource:

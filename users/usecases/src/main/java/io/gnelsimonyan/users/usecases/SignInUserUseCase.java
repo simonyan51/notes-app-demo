@@ -1,7 +1,7 @@
 package io.gnelsimonyan.users.usecases;
 
 import io.gnelsimonyan.users.boundaries.output.SignInUserOutputBoundary;
-import io.gnelsimonyan.users.common.JWTUtils;
+import io.gnelsimonyan.users.common.TokenManager;
 import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.input.params.SignInUserParams;
@@ -11,14 +11,14 @@ public class SignInUserUseCase implements SignInUserInputBoundary {
 
     private final SignInUserOutputBoundary signInUserOutputBoundary;
 
-    private final JWTUtils jwtUtils;
+    private final TokenManager tokenManager;
 
     public SignInUserUseCase(
             final SignInUserOutputBoundary signInUserOutputBoundary,
-            final JWTUtils jwtUtils
+            final TokenManager tokenManager
     ) {
         this.signInUserOutputBoundary = signInUserOutputBoundary;
-        this.jwtUtils = jwtUtils;
+        this.tokenManager = tokenManager;
     }
 
     @Override
@@ -30,6 +30,6 @@ public class SignInUserUseCase implements SignInUserInputBoundary {
                 params.password()
         );
 
-        return jwtUtils.generateToken(foundUser.email());
+        return tokenManager.generateToken(foundUser.email());
     }
 }

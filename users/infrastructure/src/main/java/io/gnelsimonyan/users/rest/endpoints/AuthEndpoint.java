@@ -5,14 +5,12 @@ import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.rest.endpoints.dtos.JwtTokenResponse;
 import io.gnelsimonyan.users.rest.endpoints.dtos.SignInRequest;
 import io.gnelsimonyan.users.rest.endpoints.dtos.UserResponse;
-import io.gnelsimonyan.users.rest.endpoints.mappers.UserDtoMapper;
+import io.gnelsimonyan.users.rest.mappers.UserDtoMapper;
 import io.gnelsimonyan.users.user.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping("v1/auth")
@@ -42,8 +40,8 @@ public class AuthEndpoint {
     }
 
     @GetMapping("info")
-    public ResponseEntity<UserResponse> getUserInfo(Principal principal) {
-        User user = findUserInputBoundary.findUserByEmail(((UserDetails) principal).getUsername());
+    public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserDetails principal) {
+        User user = findUserInputBoundary.findUserByEmail(principal.getUsername());
 
         return ResponseEntity.ok(UserDtoMapper.mapUserToUserResponse(user));
     }

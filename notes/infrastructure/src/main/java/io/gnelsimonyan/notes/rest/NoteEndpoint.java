@@ -79,7 +79,7 @@ public class NoteEndpoint {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteNote(@PathVariable("id") final Long noteId) {
+    public ResponseEntity<?> deleteNote(@PathVariable("id") final Long noteId) {
         removeUserNoteInputBoundary.removeUserNote(noteId, null);
 
         return ResponseEntity.ok(null);

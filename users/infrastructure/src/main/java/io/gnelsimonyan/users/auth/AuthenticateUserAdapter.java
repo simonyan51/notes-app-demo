@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthenticateUserAdapter implements SignInUserOutputBoundary {
+class AuthenticateUserAdapter implements SignInUserOutputBoundary {
 
     private final AuthenticationManager authenticationManager;
 

@@ -21,7 +21,16 @@
         <module>usecases</module>
         <module>application</module>
         <module>infrastructure</module>
+        <module>api-client</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>

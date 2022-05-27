@@ -9,24 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>application</artifactId>
+    <artifactId>notes-application</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>io.gnelsimonyan</groupId>
-            <artifactId>infrastructure</artifactId>
+            <artifactId>notes-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.gnelsimonyan</groupId>
-            <artifactId>usecases</artifactId>
+            <artifactId>notes-usecases</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.gnelsimonyan</groupId>
-            <artifactId>entities</artifactId>
+            <artifactId>notes-entities</artifactId>
             <version>${project.version}</version>
         </dependency>
 

@@ -9,17 +9,20 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.util.Date;
 
-public class JWTUtils {
+public class TokenManager {
+
+    private final String subject;
 
     private final String secret;
 
-    public JWTUtils(final String secret) {
+    public TokenManager(String subject, String secret) {
+        this.subject = subject;
         this.secret = secret;
     }
 
     public String generateToken(final String email) throws IllegalArgumentException, JWTCreationException {
         return JWT.create()
-                .withSubject("user")
+                .withSubject(subject)
                 .withClaim("email", email)
                 .withIssuedAt(new Date())
                 .sign(Algorithm.HMAC256(secret));
@@ -27,7 +30,7 @@ public class JWTUtils {
 
     public String validateTokenAndRetrieveSubject(final String token) throws JWTVerificationException {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
-                .withSubject("user")
+                .withSubject(subject)
                 .build();
 
         DecodedJWT jwt = verifier.verify(token);

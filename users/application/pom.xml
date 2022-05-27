@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.gnelsimonyan</groupId>
-            <artifactId>infrastructure</artifactId>
+            <artifactId>users-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
 

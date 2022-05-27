@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>usecases</artifactId>
+    <artifactId>notes-usecases</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>io.gnelsimonyan</groupId>
-            <artifactId>entities</artifactId>
+            <artifactId>notes-entities</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
