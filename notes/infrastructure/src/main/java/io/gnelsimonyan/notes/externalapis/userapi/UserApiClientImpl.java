@@ -21,7 +21,8 @@ class UserApiClientImpl implements UserApiClient {
 
     @Override
     public UserResponse getAuthorizedUser(final String token) {
-        return new HttpClientExecutor<UserResponse>()
+        return HttpClientExecutor
+                .<UserResponse>create()
                 .setUrl(this.userApiClientUrl + "/auth/info")
                 .setMethod(HttpMethod.GET)
                 .setClassType(UserResponse.class)

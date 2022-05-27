@@ -16,7 +16,11 @@ public class HttpClientExecutor<T> {
 
     private Class<T> classType;
 
-    public HttpClientExecutor() {
+    public static <T> HttpClientExecutor<T> create() {
+        return new HttpClientExecutor<>();
+    }
+
+    private HttpClientExecutor() {
         headers = new HttpHeaders();
     }
 

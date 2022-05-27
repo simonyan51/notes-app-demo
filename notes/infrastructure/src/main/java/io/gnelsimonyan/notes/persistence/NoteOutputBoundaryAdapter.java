@@ -3,13 +3,10 @@ package io.gnelsimonyan.notes.persistence;
 import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.RemoveNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.SaveNoteOutputBoundary;
-import io.gnelsimonyan.notes.boundaries.output.TransactionManagerOutputBoundary;
 import io.gnelsimonyan.notes.Note;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Component
 class NoteOutputBoundaryAdapter implements
