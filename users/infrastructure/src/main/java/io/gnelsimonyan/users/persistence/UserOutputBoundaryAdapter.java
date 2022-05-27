@@ -4,15 +4,13 @@ import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.output.FindUserOutputBoundary;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
 
 @Component
-public class UserOutputBoundaryAdapter implements FindUserOutputBoundary {
+class UserOutputBoundaryAdapter implements FindUserOutputBoundary {
 
     private final UserRepository userRepository;
 
-    public UserOutputBoundaryAdapter(final UserRepository userRepository) {
+    UserOutputBoundaryAdapter(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

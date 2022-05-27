@@ -4,11 +4,14 @@ import io.gnelsimonyan.users.persistence.common.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-class UserEntity extends AbstractEntity {
+@Table(name = "users", indexes = {
+        @Index(columnList = "email", name = "idx_email")
+})
+public class UserEntity extends AbstractEntity {
 
     @Column(name="email", nullable = false, unique = true)
     private String email;

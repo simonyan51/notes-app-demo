@@ -5,7 +5,6 @@ import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.output.FindUserOutputBoundary;
 import io.gnelsimonyan.users.boundaries.output.SignInUserOutputBoundary;
 import io.gnelsimonyan.users.common.TokenManager;
-import io.gnelsimonyan.users.configuration.InfrastructureConfiguration;
 import io.gnelsimonyan.users.usecases.FindUserUseCase;
 import io.gnelsimonyan.users.usecases.SignInUserUseCase;
 import org.springframework.beans.factory.annotation.Value;

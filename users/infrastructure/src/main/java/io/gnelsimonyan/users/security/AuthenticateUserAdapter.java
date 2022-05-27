@@ -1,4 +1,4 @@
-package io.gnelsimonyan.users.auth;
+package io.gnelsimonyan.users.security;
 
 import io.gnelsimonyan.users.boundaries.input.FindUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.output.SignInUserOutputBoundary;
@@ -15,7 +15,7 @@ class AuthenticateUserAdapter implements SignInUserOutputBoundary {
 
     private final FindUserInputBoundary findUserInputBoundary;
 
-    public AuthenticateUserAdapter(
+    AuthenticateUserAdapter(
             final AuthenticationManager authenticationManager,
             final FindUserInputBoundary findUserInputBoundary
             ) {

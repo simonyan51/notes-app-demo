@@ -20,11 +20,8 @@ public class NoteBoundariesConfiguration {
     }
 
     @Bean
-    public CreateUserNoteInputBoundary createUserNoteInputBoundary(
-            final FindUserOutputBoundary findUserOutputBoundary,
-            final SaveNoteOutputBoundary saveNoteOutputBoundary
-    ) {
-        return new CreateUserNoteUseCase(findUserOutputBoundary, saveNoteOutputBoundary);
+    public CreateUserNoteInputBoundary createUserNoteInputBoundary(final SaveNoteOutputBoundary saveNoteOutputBoundary) {
+        return new CreateUserNoteUseCase(saveNoteOutputBoundary);
     }
 
     @Bean

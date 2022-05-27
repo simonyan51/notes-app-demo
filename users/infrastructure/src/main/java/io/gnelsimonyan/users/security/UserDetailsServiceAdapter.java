@@ -1,4 +1,4 @@
-package io.gnelsimonyan.users.auth;
+package io.gnelsimonyan.users.security;
 
 import io.gnelsimonyan.users.boundaries.input.FindUserInputBoundary;
 import io.gnelsimonyan.users.user.User;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 
 @Component
-public class UserDetailsServiceAdapter implements UserDetailsService {
+class UserDetailsServiceAdapter implements UserDetailsService {
     private final FindUserInputBoundary findUserInputBoundary;
 
-    public UserDetailsServiceAdapter(FindUserInputBoundary findUserInputBoundary) {
+    UserDetailsServiceAdapter(FindUserInputBoundary findUserInputBoundary) {
         this.findUserInputBoundary = findUserInputBoundary;
     }
 
