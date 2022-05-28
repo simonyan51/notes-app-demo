@@ -43,7 +43,7 @@ jobs:
       run: |
         cd notes/application
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:notes-app-$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:notes-app-$IMAGE_TAG
     
   build-users:
     runs-on: ubuntu-latest
@@ -81,6 +81,6 @@ jobs:
       run: |
         cd users/application
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:users-app-$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:users-app-$IMAGE_TAG
     
 
