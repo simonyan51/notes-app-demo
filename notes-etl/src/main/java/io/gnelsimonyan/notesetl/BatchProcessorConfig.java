@@ -30,16 +30,20 @@ import java.util.Collections;
 @EnableJpaRepositories
 public class BatchProcessorConfig {
     private final int chunkSize;
+    private final int pageSize;
     private final NoteRepository noteRepository;
     private final StepBuilderFactory stepBuilderFactory;
 
     public BatchProcessorConfig(
             @Value("${batch.chunk:10}")
             final int chunkSize,
+            @Value("${batch.pageSize}")
+            final int pageSize,
             final NoteRepository noteRepository,
             final StepBuilderFactory stepBuilderFactory
     ) {
         this.chunkSize = chunkSize;
+        this.pageSize = pageSize;
         this.noteRepository = noteRepository;
         this.stepBuilderFactory = stepBuilderFactory;
     }
@@ -49,7 +53,7 @@ public class BatchProcessorConfig {
         return new RepositoryItemReaderBuilder<NoteEntity>()
                 .name("notesRead")
                 .repository(noteRepository)
-                .pageSize(10)
+                .pageSize(pageSize)
                 .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
                 .methodName("findAll")
                 .build();

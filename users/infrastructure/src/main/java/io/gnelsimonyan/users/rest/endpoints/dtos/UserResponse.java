@@ -2,12 +2,10 @@ package io.gnelsimonyan.users.rest.endpoints.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Data
-@Getter
 @AllArgsConstructor(staticName = "of")
 public class UserResponse {
     private final Long id;

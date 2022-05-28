@@ -6,15 +6,14 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "notes", indexes = {
         @Index(columnList = "user_id", name = "idx_note_user_id")
 })
-@Getter
+@Data
 @NoArgsConstructor
 @Accessors(fluent = true)
-@AllArgsConstructor(staticName = "of", access = AccessLevel.PRIVATE)
+@AllArgsConstructor(staticName = "of")
 public class NoteEntity {
     @Id
     @GeneratedValue

@@ -5,10 +5,10 @@ import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.UpdateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.Note;
-import io.gnelsimonyan.notes.rest.dtos.CreateNoteRequest;
+import io.gnelsimonyan.notes.rest.dtos.SaveNoteRequest;
 import io.gnelsimonyan.notes.rest.mappers.NoteDtoMapper;
 import io.gnelsimonyan.notes.rest.dtos.NoteResponse;
-import io.gnelsimonyan.notes.rest.dtos.UpdateNoteRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/notes")
+@AllArgsConstructor
 public class NoteEndpoint {
 
     private final FindUserNoteInputBoundary findUserNoteInputBoundary;
@@ -29,18 +30,6 @@ public class NoteEndpoint {
     private final UpdateUserNoteInputBoundary updateUserNoteInputBoundary;
 
     private final RemoveUserNoteInputBoundary removeUserNoteInputBoundary;
-
-    public NoteEndpoint(
-            final FindUserNoteInputBoundary findUserNoteInputBoundary,
-            final CreateUserNoteInputBoundary createUserNoteInputBoundary,
-            final UpdateUserNoteInputBoundary updateUserNoteInputBoundary,
-            final RemoveUserNoteInputBoundary removeUserNoteInputBoundary
-    ) {
-        this.findUserNoteInputBoundary = findUserNoteInputBoundary;
-        this.createUserNoteInputBoundary = createUserNoteInputBoundary;
-        this.updateUserNoteInputBoundary = updateUserNoteInputBoundary;
-        this.removeUserNoteInputBoundary = removeUserNoteInputBoundary;
-    }
 
     @GetMapping
     public ResponseEntity<List<NoteResponse>> getNotes(
@@ -72,7 +61,7 @@ public class NoteEndpoint {
             @AuthenticationPrincipal(expression = "id") final Long userId,
             @RequestBody
             @Valid
-            final CreateNoteRequest createNoteRequest
+            final SaveNoteRequest createNoteRequest
     ) {
 
         Note createdNote = createUserNoteInputBoundary.createUserNote(
@@ -88,7 +77,7 @@ public class NoteEndpoint {
             @PathVariable("id") final long noteId,
             @RequestBody
             @Valid
-            final UpdateNoteRequest updateNoteRequest
+            final SaveNoteRequest updateNoteRequest
     ) {
 
         Note updatedNote = updateUserNoteInputBoundary.updateUserNote(

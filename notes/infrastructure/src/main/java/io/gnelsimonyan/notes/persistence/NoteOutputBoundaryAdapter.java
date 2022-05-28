@@ -4,21 +4,19 @@ import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.RemoveNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.SaveNoteOutputBoundary;
 import io.gnelsimonyan.notes.Note;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 class NoteOutputBoundaryAdapter implements
         FindUserNoteOutputBoundary,
         SaveNoteOutputBoundary,
         RemoveNoteOutputBoundary {
 
     private final NoteRepository noteRepository;
-
-    public NoteOutputBoundaryAdapter(final NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
-    }
 
     @Override
     public List<Note> findNoteByUserId(final Long userId) {

@@ -1,40 +1,37 @@
 package io.gnelsimonyan.notes.boundaries.input.params;
 
-public interface SaveUserNoteParams {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
-    Long userId();
+@Data
+@Accessors(fluent = true)
+@AllArgsConstructor(staticName = "of")
+public class SaveUserNoteParams {
+    private static final int TITLE_MAX_LENGTH = 50;
+    private static final int TEXT_MAX_LENGTH = 1000;
 
-    String title();
+    private Long userId;
 
-    String text();
+    private String title;
 
-    void validateParams();
+    private String text;
 
-    static SaveUserNoteParams of(final Long userId, final String title, final String text) {
-        return new SaveUserNoteParamsImpl(userId, title, text);
-    }
+    public void validateParams() {
+        if (userId == null) {
+            throw new IllegalArgumentException("userId must be provided");
+        }
 
-    record SaveUserNoteParamsImpl(Long userId, String title, String text) implements SaveUserNoteParams {
-        private static final int TITLE_MAX_LENGTH = 50;
-        private static final int TEXT_MAX_LENGTH = 1000;
+        if (title == null || title.isEmpty() || title.length() > TITLE_MAX_LENGTH) {
+            throw new IllegalArgumentException(
+                    "title must be provided and length must not exceed " + TITLE_MAX_LENGTH
+            );
+        }
 
-        @Override
-        public void validateParams() {
-            if (userId == null) {
-                throw new IllegalArgumentException("userId must be provided");
-            }
-
-            if (title == null || title.isEmpty() || title.length() > SaveUserNoteParamsImpl.TITLE_MAX_LENGTH) {
-                throw new IllegalArgumentException(
-                        "title must be provided and length must not exceed " + SaveUserNoteParamsImpl.TITLE_MAX_LENGTH
-                );
-            }
-
-            if (text != null && text.length() > SaveUserNoteParamsImpl.TEXT_MAX_LENGTH) {
-                throw new IllegalArgumentException(
-                        "text length must not exceed " + SaveUserNoteParamsImpl.TITLE_MAX_LENGTH
-                );
-            }
+        if (text != null && text.length() > TEXT_MAX_LENGTH) {
+            throw new IllegalArgumentException(
+                    "text length must not exceed " + TITLE_MAX_LENGTH
+            );
         }
     }
 }

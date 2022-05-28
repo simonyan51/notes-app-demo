@@ -1,6 +1,10 @@
 package io.gnelsimonyan.notes.persistence;
 
-import io.gnelsimonyan.notes.persistence.common.AbstractEntity;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +13,14 @@ import java.time.LocalDateTime;
 @Table(name = "notes", indexes = {
         @Index(columnList = "user_id", name = "idx_note_user_id")
 })
-class NoteEntity extends AbstractEntity {
+@Data
+@NoArgsConstructor
+@Accessors(fluent = true)
+@AllArgsConstructor(staticName = "of")
+class NoteEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Column(name="title", nullable = false)
     private String title;
@@ -20,52 +31,9 @@ class NoteEntity extends AbstractEntity {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    static NoteEntity of(
-            final Long id,
-            final String title,
-            final String text,
-            final LocalDateTime createdAt,
-            final LocalDateTime updatedAt,
-            final Long userId
-    ) {
-        return new NoteEntity(
-                id,
-                title,
-                text,
-                createdAt,
-                updatedAt,
-                userId
-        );
-    }
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    public NoteEntity() {
-        super();
-    }
-
-    public NoteEntity(
-            final Long id,
-            final String title,
-            final String text,
-            final LocalDateTime createdAt,
-            final LocalDateTime updatedAt,
-            final Long userId
-    ) {
-        super(id, createdAt, updatedAt);
-        this.title = title;
-        this.text = text;
-        this.userId = userId;
-    }
-
-    public String title() {
-        return title;
-    }
-
-    public String text() {
-        return text;
-    }
-
-    public Long userId() {
-        return userId;
-    }
-
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }

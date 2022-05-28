@@ -1,6 +1,5 @@
 package io.gnelsimonyan.users.rest.endpoints.dtos;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -8,7 +7,6 @@ import javax.validation.constraints.*;
 
 @Data
 @Accessors(fluent = true)
-@AllArgsConstructor
 public class SignInRequest {
     @NotEmpty
     @Email

@@ -19,9 +19,9 @@ interface NoteEntityMapper {
                 note.id(),
                 note.title(),
                 note.text(),
+                note.userId(),
                 note.createdAt(),
-                note.updatedAt(),
-                note.userId()
+                note.updatedAt()
         );
     }
 }

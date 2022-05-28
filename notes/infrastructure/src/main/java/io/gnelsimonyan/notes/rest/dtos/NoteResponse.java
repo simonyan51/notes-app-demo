@@ -1,7 +1,12 @@
 package io.gnelsimonyan.notes.rest.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
+@AllArgsConstructor(staticName = "of")
 public class NoteResponse {
     private final Long id;
 
@@ -12,32 +17,4 @@ public class NoteResponse {
     private final LocalDateTime createdAt;
 
     private final LocalDateTime updatedAt;
-
-    public NoteResponse(Long id, String title, String text, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.title = title;
-        this.text = text;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
 }

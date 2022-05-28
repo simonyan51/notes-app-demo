@@ -4,16 +4,14 @@ import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class FindUserNoteUseCase implements FindUserNoteInputBoundary {
 
     private final FindUserNoteOutputBoundary findUserNoteOutputBoundary;
-
-    public FindUserNoteUseCase(final FindUserNoteOutputBoundary findUserNoteOutputBoundary) {
-        this.findUserNoteOutputBoundary = findUserNoteOutputBoundary;
-    }
 
     @Override
     public List<Note> findUserNotes(final Long userId) {

@@ -1,4 +1,4 @@
-{"id":[1],"title":["test1@example.com"],"text":["12345678"],"createdAt":["2022-05-28T08:43:33.499940"],"updatedAt":[null]}
-{"id":[2],"title":["test2@example.com"],"text":["12345678"],"createdAt":["2022-05-28T08:45:48.766282"],"updatedAt":[null]}
-{"id":[3],"title":["test3@example.com"],"text":["12345678"],"createdAt":["2022-05-28T08:45:51.609959"],"updatedAt":[null]}
-{"id":[4],"title":["test5@example.com"],"text":["12345678"],"createdAt":["2022-05-28T08:45:54.773568"],"updatedAt":[null]}
+{"id":1,"title":"test1@example.com","text":"12345678","createdAt":"2022-05-28T08:43:33.499940"}
+{"id":2,"title":"test2@example.com","text":"12345678","createdAt":"2022-05-28T08:45:48.766282"}
+{"id":3,"title":"test3@example.com","text":"12345678","createdAt":"2022-05-28T08:45:51.609959"}
+{"id":4,"title":"test5@example.com","text":"12345678","createdAt":"2022-05-28T08:45:54.773568"}

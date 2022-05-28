@@ -2,5 +2,5 @@ package io.gnelsimonyan.notes.externalapis.userapi;
 
 public interface UserApiClient {
 
-    UserResponse getAuthorizedUser(String token);
+    AuthorizedUser getAuthorizedUser(String token);
 }

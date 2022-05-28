@@ -5,16 +5,12 @@ import io.gnelsimonyan.notes.Note;
 import io.gnelsimonyan.notes.boundaries.input.CreateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.params.SaveUserNoteParams;
 import io.gnelsimonyan.notes.boundaries.output.SaveNoteOutputBoundary;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class CreateUserNoteUseCase implements CreateUserNoteInputBoundary {
 
     private final SaveNoteOutputBoundary createNoteOutputBoundary;
-
-    public CreateUserNoteUseCase(
-            final SaveNoteOutputBoundary createNoteOutputBoundary
-    ) {
-        this.createNoteOutputBoundary = createNoteOutputBoundary;
-    }
 
     @Override
     public Note createUserNote(final SaveUserNoteParams createNoteParams) {

@@ -5,20 +5,14 @@ import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.RemoveNoteOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class RemoveUserNoteUseCase implements RemoveUserNoteInputBoundary {
 
     private final RemoveNoteOutputBoundary removeNoteOutputBoundary;
 
     private final FindUserNoteOutputBoundary findUserNoteOutputBoundary;
-
-    public RemoveUserNoteUseCase(
-            final RemoveNoteOutputBoundary removeNoteOutputBoundary,
-            final FindUserNoteOutputBoundary findUserNoteOutputBoundary
-    ) {
-        this.removeNoteOutputBoundary = removeNoteOutputBoundary;
-        this.findUserNoteOutputBoundary = findUserNoteOutputBoundary;
-    }
 
     @Override
     public void removeUserNote(final Long noteId, final Long userId) {

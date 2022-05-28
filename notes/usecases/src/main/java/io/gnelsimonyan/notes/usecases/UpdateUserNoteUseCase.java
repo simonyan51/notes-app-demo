@@ -7,22 +7,14 @@ import io.gnelsimonyan.notes.boundaries.output.SaveNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.TransactionManagerOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
 
     private final FindUserNoteOutputBoundary findUserNoteOutputBoundary;
     private final SaveNoteOutputBoundary saveNoteOutputBoundary;
     private final TransactionManagerOutputBoundary transactionManager;
-
-    public UpdateUserNoteUseCase(
-            final FindUserNoteOutputBoundary findUserNoteOutputBoundary,
-            final SaveNoteOutputBoundary saveNoteOutputBoundary,
-            final TransactionManagerOutputBoundary transactionManagerOutputBoundary
-            ) {
-        this.findUserNoteOutputBoundary = findUserNoteOutputBoundary;
-        this.saveNoteOutputBoundary = saveNoteOutputBoundary;
-        this.transactionManager = transactionManagerOutputBoundary;
-    }
 
     @Override
     public Note updateUserNote(final Long noteId, final SaveUserNoteParams saveUserNoteParams) {

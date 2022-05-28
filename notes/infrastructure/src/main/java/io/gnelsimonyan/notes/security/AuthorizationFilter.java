@@ -1,7 +1,7 @@
 package io.gnelsimonyan.notes.security;
 
 import io.gnelsimonyan.notes.externalapis.userapi.UserApiClient;
-import io.gnelsimonyan.notes.externalapis.userapi.UserResponse;
+import io.gnelsimonyan.notes.externalapis.userapi.AuthorizedUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ class AuthorizationFilter extends OncePerRequestFilter {
 
         if (authorizationToken != null && !authorizationToken.isBlank()) {
             try {
-                UserResponse userResponse = userApiClient.getAuthorizedUser(authorizationToken);
+                AuthorizedUser userResponse = userApiClient.getAuthorizedUser(authorizationToken);
 
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userResponse,

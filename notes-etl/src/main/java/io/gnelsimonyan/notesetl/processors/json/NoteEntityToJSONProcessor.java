@@ -14,11 +14,11 @@ public class NoteEntityToJSONProcessor implements ItemProcessor<NoteEntity, JSON
         logger.info("Processing note entity {}", noteEntity);
 
         JSONObject jsonData = new JSONObject()
-                .append("id", noteEntity.id())
-                .append("title", noteEntity.title())
-                .append("text", noteEntity.text())
-                .append("createdAt", noteEntity.createdAt())
-                .append("updatedAt", noteEntity.updatedAt());
+                .put("id", noteEntity.id())
+                .put("title", noteEntity.title())
+                .put("text", noteEntity.text())
+                .put("createdAt", noteEntity.createdAt())
+                .put("updatedAt", noteEntity.updatedAt());
 
         logger.debug("Successfully processed to json format {}", jsonData);
         return jsonData;

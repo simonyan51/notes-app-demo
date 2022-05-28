@@ -7,7 +7,7 @@ import io.gnelsimonyan.notes.rest.dtos.SaveNoteRequest;
 
 public interface NoteDtoMapper {
     static NoteResponse mapNoteToNoteResponse(final Note note) {
-        return new NoteResponse(
+        return NoteResponse.of(
                 note.id(),
                 note.title(),
                 note.text(),
@@ -18,12 +18,12 @@ public interface NoteDtoMapper {
 
     static SaveUserNoteParams mapNoteRequestToSaveUserNoteParams(
             final long userId,
-            final SaveNoteRequest createNoteRequest
+            final SaveNoteRequest saveNoteRequest
     ) {
         return SaveUserNoteParams.of(
                 userId,
-                createNoteRequest.getTitle(),
-                createNoteRequest.getText()
+                saveNoteRequest.getTitle(),
+                saveNoteRequest.getText()
         );
     }
 }
