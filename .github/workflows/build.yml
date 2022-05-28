@@ -23,5 +23,5 @@ jobs:
           cd notes && ./mvnw clean && ./mvnw package
           && cd ../users && ./mvnw clean && ./mvnw package
           && && cd ../notes-etl ./mvnw clean && ./mvnw package
-      |
+      
 
