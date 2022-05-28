@@ -1,0 +1,30 @@
+name: build phase of services
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-notes:
+    uses: simonyan51/notes-app-demo/.github/workflows/build-base.yml@main
+    steps:
+    - name: Build services
+      run: |
+          cd notes
+          sh ./mvnw clean 
+          sh ./mvnw package
+
+    - name: Build, tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: test-notes-app
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        cd notes/application
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t latest -t notes-app .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    
+      
+

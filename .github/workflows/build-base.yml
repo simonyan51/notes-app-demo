@@ -1,13 +1,10 @@
 name: build phase of services
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_call:
 
 jobs:
-  build:
+  build-base:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -17,12 +14,6 @@ jobs:
         java-version: '18'
         distribution: 'temurin'
         cache: maven
-
-    - name: Build services
-      run: |
-          cd notes
-          sh ./mvnw clean 
-          sh ./mvnw package
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -35,14 +26,6 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: test-notes-app
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        cd notes/application
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    
       
 
