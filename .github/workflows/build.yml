@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 18
@@ -21,5 +19,9 @@ jobs:
         cache: maven
 
     - name: Build services
-      run: sh ./build-services.sh
+      run: |
+          cd notes && ./mvnw clean && ./mvnw package
+          && cd ../users && ./mvnw clean && ./mvnw package
+          && && cd ../notes-etl ./mvnw clean && ./mvnw package
+      |
 
