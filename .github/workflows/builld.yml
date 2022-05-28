@@ -42,7 +42,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
         cd notes/application
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t latest-notes -t notes-app .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:notes-app-$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
     
   build-users:
@@ -80,7 +80,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
         cd users/application
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t latest-users -t users-app .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:users-app-$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
     
 
