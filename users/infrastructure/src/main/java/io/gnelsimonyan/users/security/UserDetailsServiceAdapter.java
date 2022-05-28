@@ -19,10 +19,10 @@ class UserDetailsServiceAdapter implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findUserInputBoundary.findUserByEmail(username);
 
-        return new org.springframework.security.core.userdetails.User(
-                user.email(),
-                user.password(),
-                Collections.emptyList()
-        );
+        return AuthenticatedUserBuilder
+                .create()
+                .email(user.email())
+                .password(user.password())
+                .build();
     }
 }

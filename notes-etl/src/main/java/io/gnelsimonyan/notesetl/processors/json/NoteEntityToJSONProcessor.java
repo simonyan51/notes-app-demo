@@ -15,6 +15,7 @@ public class NoteEntityToJSONProcessor implements ItemProcessor<NoteEntity, JSON
 
         JSONObject jsonData = new JSONObject()
                 .put("id", noteEntity.id())
+                .put("userId", noteEntity.userId())
                 .put("title", noteEntity.title())
                 .put("text", noteEntity.text())
                 .put("createdAt", noteEntity.createdAt())

@@ -37,7 +37,7 @@ public class BatchProcessorConfig {
     public BatchProcessorConfig(
             @Value("${batch.chunk:10}")
             final int chunkSize,
-            @Value("${batch.pageSize}")
+            @Value("${batch.pageSize:1}")
             final int pageSize,
             final NoteRepository noteRepository,
             final StepBuilderFactory stepBuilderFactory
