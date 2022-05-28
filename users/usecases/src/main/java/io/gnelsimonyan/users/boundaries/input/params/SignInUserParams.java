@@ -1,15 +1,16 @@
 package io.gnelsimonyan.users.boundaries.input.params;
 
-public interface SignInUserParams {
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.experimental.Accessors;
 
-    String email();
+@Data
+@Accessors(fluent = true)
+@AllArgsConstructor(staticName = "of")
+public class SignInUserParams {
 
-    String password();
+    private final String email;
 
-    static SignInUserParams of(final String email, final String password) {
-        return new SignInUserParamsImpl(email, password);
-    }
-
-    record SignInUserParamsImpl(String email, String password) implements SignInUserParams { }
+    private final String password;
 }
 

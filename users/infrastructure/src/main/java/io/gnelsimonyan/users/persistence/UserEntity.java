@@ -1,34 +1,35 @@
 package io.gnelsimonyan.users.persistence;
 
-import io.gnelsimonyan.users.persistence.common.AbstractEntity;
+import lombok.*;
+import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users", indexes = {
         @Index(columnList = "email", name = "idx_email")
 })
-public class UserEntity extends AbstractEntity {
+@Data
+@Accessors(fluent = true)
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
+@Builder
+public class UserEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @Column(name="email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
-
-    public UserEntity() {
-        super();
-    }
-
-    public String email() {
-        return email;
-    }
-
-    public String password() {
-        return password;
-    }
 
 }

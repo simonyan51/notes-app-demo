@@ -1,16 +1,15 @@
 package io.gnelsimonyan.users.rest.endpoints.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
 
+@Data
+@Getter
+@AllArgsConstructor(staticName = "of")
 public class JwtTokenResponse {
-    private final String accessToken;
-
-    public JwtTokenResponse(String accessToken) {
-        this.accessToken = accessToken;
-    }
 
     @JsonProperty("access_token")
-    public String getAccessToken() {
-        return accessToken;
-    }
+    private final String accessToken;
 }

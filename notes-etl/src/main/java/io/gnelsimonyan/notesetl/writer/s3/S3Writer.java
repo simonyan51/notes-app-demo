@@ -1,4 +1,4 @@
-package io.gnelsimonyan.notesetl.writer;
+package io.gnelsimonyan.notesetl.writer.s3;
 
 import org.springframework.batch.item.ItemWriter;
 

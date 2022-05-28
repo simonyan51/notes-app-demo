@@ -1,4 +1,7 @@
 spring:
+  batch:
+    jdbc:
+      initialize-schema: always
   datasource:
     url: jdbc:postgresql://localhost:5432/notes
     username: postgres
@@ -10,3 +13,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+
+logging:
+  level:
+    root: INFO
+
+batch:
+  chunk: 10

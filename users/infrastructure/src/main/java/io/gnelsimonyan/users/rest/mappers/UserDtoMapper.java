@@ -8,7 +8,7 @@ import io.gnelsimonyan.users.boundaries.input.params.SignInUserParams;
 public interface UserDtoMapper {
 
     static UserResponse mapUserToUserResponse(User user) {
-        return new UserResponse(
+        return UserResponse.of(
                 user.id(),
                 user.email(),
                 user.createdAt(),

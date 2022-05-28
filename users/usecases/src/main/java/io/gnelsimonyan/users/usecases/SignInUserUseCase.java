@@ -6,20 +6,14 @@ import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.input.params.SignInUserParams;
 import io.gnelsimonyan.users.common.Assert;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class SignInUserUseCase implements SignInUserInputBoundary {
 
     private final SignInUserOutputBoundary signInUserOutputBoundary;
 
     private final TokenManager tokenManager;
-
-    public SignInUserUseCase(
-            final SignInUserOutputBoundary signInUserOutputBoundary,
-            final TokenManager tokenManager
-    ) {
-        this.signInUserOutputBoundary = signInUserOutputBoundary;
-        this.tokenManager = tokenManager;
-    }
 
     @Override
     public String signIn(final SignInUserParams params) {

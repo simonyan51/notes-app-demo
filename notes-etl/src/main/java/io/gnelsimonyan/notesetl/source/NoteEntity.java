@@ -1,14 +1,12 @@
 package io.gnelsimonyan.notesetl.source;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "notes", indexes = {
         @Index(columnList = "user_id", name = "idx_note_user_id")

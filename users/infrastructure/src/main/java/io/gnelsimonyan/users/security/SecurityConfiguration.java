@@ -1,5 +1,6 @@
 package io.gnelsimonyan.users.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,19 +16,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 class SecurityConfiguration {
 
     private final UserDetailsService userDetailsService;
 
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
-
-    SecurityConfiguration(
-            final UserDetailsService userDetailsService,
-            final JwtAuthorizationFilter jwtAuthorizationFilter
-    ) {
-        this.userDetailsService = userDetailsService;
-        this.jwtAuthorizationFilter = jwtAuthorizationFilter;
-    }
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -36,6 +30,7 @@ class SecurityConfiguration {
                 .disable()
                 .cors()
                 .and()
+                .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/v1/auth/sign-in")
                 .permitAll()
@@ -46,7 +41,6 @@ class SecurityConfiguration {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

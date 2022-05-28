@@ -1,7 +1,14 @@
 package io.gnelsimonyan.users.rest.endpoints.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import javax.validation.constraints.*;
 
+@Data
+@Accessors(fluent = true)
+@AllArgsConstructor
 public class SignInRequest {
     @NotEmpty
     @Email
@@ -10,20 +17,4 @@ public class SignInRequest {
     @NotNull
     @Size(min = 8, message = "Password size must not exceed 8 characters")
     private final String password;
-
-    public SignInRequest(
-            final String email,
-            final String password
-    ) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public String email() {
-        return email;
-    }
-
-    public String password() {
-        return password;
-    }
 }

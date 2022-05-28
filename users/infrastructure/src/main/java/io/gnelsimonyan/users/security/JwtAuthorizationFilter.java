@@ -2,6 +2,7 @@ package io.gnelsimonyan.users.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.gnelsimonyan.users.common.TokenManager;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@AllArgsConstructor
 class JwtAuthorizationFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_TOKEN_PREFIX = "Bearer ";
@@ -23,14 +25,6 @@ class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
 
     private final TokenManager tokenManager;
-
-    JwtAuthorizationFilter(
-            final UserDetailsService userDetailsService,
-            final TokenManager tokenManager
-    ) {
-        this.userDetailsService = userDetailsService;
-        this.tokenManager = tokenManager;
-    }
 
     @Override
     protected void doFilterInternal(
@@ -66,7 +60,7 @@ class JwtAuthorizationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
 
-        } catch (JWTVerificationException exc) {
+        } catch (Exception exception) {
             filterChain.doFilter(request, response);
             return;
         }
