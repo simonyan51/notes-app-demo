@@ -1,5 +1,12 @@
-name: Publish workflow
+name: Publish services
+
+on:
+  workflow_run:
+    workflows:
+      - build
+    types:
+      - completed
 
 jobs:
-  publish:
+  publish-notes:
     

@@ -3,6 +3,7 @@ package io.gnelsimonyan.notesetl;
 import io.gnelsimonyan.notesetl.processors.json.NoteEntityToJSONProcessor;
 import io.gnelsimonyan.notesetl.source.NoteEntity;
 import io.gnelsimonyan.notesetl.source.NoteRepository;
+import io.gnelsimonyan.notesetl.writer.file.JSONObjectToParquetWriter;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -68,9 +69,13 @@ public class BatchProcessorConfig {
     FlatFileItemWriter<JSONObject> flatFileItemWriter() {
         return new FlatFileItemWriterBuilder<JSONObject>()
                 .name("fileWriter")
-                .resource(new FileSystemResource("resources/notes.json"))
+                .resource(new FileSystemResource("resources/notes-" + System.currentTimeMillis() + ".json"))
                 .lineAggregator(new PassThroughLineAggregator<>())
                 .build();
+    }
+
+    JSONObjectToParquetWriter jsonObjectToParquetWriter() {
+        return new JSONObjectToParquetWriter();
     }
 
     @Bean
@@ -85,11 +90,22 @@ public class BatchProcessorConfig {
     }
 
     @Bean
+    Step parquetStep() {
+        return stepBuilderFactory
+                .get("notesToParquetStep")
+                .<NoteEntity, JSONObject>chunk(this.chunkSize)
+                .reader(repositoryItemReader())
+                .processor(noteEntityToJSONProcessor())
+                .writer(jsonObjectToParquetWriter())
+                .build();
+    }
+
+    @Bean
     Job notesMigrationJob(JobRepository jobRepository) {
         return new JobBuilderFactory(jobRepository)
                 .get("notesProcessorJob")
                 .incrementer(new RunIdIncrementer())
-                .flow(jsonStep())
+                .flow(parquetStep())
                 .end()
                 .build();
 

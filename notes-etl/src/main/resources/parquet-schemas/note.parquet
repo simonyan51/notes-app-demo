@@ -1,0 +1,8 @@
+message note {
+    required INT64 id;
+    required INT64 userId;
+    required binary title;
+    required binary text;
+    required binary createdAt;
+    required binary updatedAt;
+}
