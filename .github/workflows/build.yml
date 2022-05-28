@@ -20,9 +20,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: change mode of build build -services shell script
-      run: chmod +x ./build-services.sh
-
     - name: Build services
-      run: sh ./build-services.sh
+      run: cd notes && sh ./mvnw package
 
