@@ -72,7 +72,7 @@
     }
   ],
   "placementConstraints": [],
-  "memory": "2048",
+  "memory": "512",
   "taskRoleArn": null,
   "compatibilities": [
     "EXTERNAL",
@@ -106,7 +106,7 @@
   ],
   "networkMode": null,
   "runtimePlatform": null,
-  "cpu": "2048",
+  "cpu": "512",
   "revision": 10,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
