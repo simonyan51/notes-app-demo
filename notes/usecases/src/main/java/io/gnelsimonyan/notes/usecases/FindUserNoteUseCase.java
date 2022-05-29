@@ -4,6 +4,7 @@ import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
+import io.gnelsimonyan.notes.exceptions.NoteNotFoundException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class FindUserNoteUseCase implements FindUserNoteInputBoundary {
     }
 
     @Override
-    public Note findUserNote(final Long noteId, final Long userId) {
+    public Note findUserNote(final Long noteId, final Long userId) throws NoteNotFoundException {
         Assert.notNull(noteId, "noteId must be provided");
         Assert.notNull(userId, "userId must be provided");
         logger.trace("Fetching user-{} note by id {}", userId, noteId);
@@ -36,7 +37,7 @@ public class FindUserNoteUseCase implements FindUserNoteInputBoundary {
         Note note = findUserNoteOutputBoundary.findUserNote(noteId, userId);
 
         if (note == null) {
-            throw new IllegalArgumentException("Note does not found");
+            throw new NoteNotFoundException("Note not found", noteId);
         }
 
         logger.debug("Successfully fetched user-{} note by id {}", userId, noteId);

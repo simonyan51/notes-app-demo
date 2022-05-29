@@ -2,6 +2,7 @@ package io.gnelsimonyan.users.rest.endpoints;
 
 import io.gnelsimonyan.users.boundaries.input.FindUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
+import io.gnelsimonyan.users.exceptions.UserNotFoundException;
 import io.gnelsimonyan.users.rest.endpoints.dtos.JwtTokenResponse;
 import io.gnelsimonyan.users.rest.endpoints.dtos.SignInRequest;
 import io.gnelsimonyan.users.rest.endpoints.dtos.UserResponse;
@@ -28,7 +29,7 @@ public class AuthEndpoint {
     private final FindUserInputBoundary findUserInputBoundary;
 
     @PostMapping("sign-in")
-    public ResponseEntity<JwtTokenResponse> signIn(@RequestBody @Valid SignInRequest signInParamsRequest) {
+    public ResponseEntity<JwtTokenResponse> signIn(@RequestBody @Valid SignInRequest signInParamsRequest) throws UserNotFoundException {
         logger.info("Sign up user by email {}", signInParamsRequest.email());
 
         String accessToken = signInUserInputBoundary.signIn(
@@ -42,7 +43,7 @@ public class AuthEndpoint {
     }
 
     @GetMapping("info")
-    public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserDetails principal) {
+    public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserDetails principal) throws UserNotFoundException {
         logger.info("Getting user credentials by email {}", principal.getUsername());
 
         User user = findUserInputBoundary.findUserByEmail(principal.getUsername());

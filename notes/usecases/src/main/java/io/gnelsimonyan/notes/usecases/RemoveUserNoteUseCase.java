@@ -5,6 +5,7 @@ import io.gnelsimonyan.notes.boundaries.output.FindUserNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.RemoveNoteOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
+import io.gnelsimonyan.notes.exceptions.NoteNotFoundException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ public class RemoveUserNoteUseCase implements RemoveUserNoteInputBoundary {
     private final FindUserNoteOutputBoundary findUserNoteOutputBoundary;
 
     @Override
-    public void removeUserNote(final Long noteId, final Long userId) {
+    public void removeUserNote(final Long noteId, final Long userId) throws NoteNotFoundException {
         Assert.notNull(noteId, "noteId must be provided");
         Assert.notNull(userId, "userId must be provided");
         logger.trace("Removing user-{} note by id {}", userId, noteId);
@@ -26,7 +27,7 @@ public class RemoveUserNoteUseCase implements RemoveUserNoteInputBoundary {
         Note note = findUserNoteOutputBoundary.findUserNote(noteId, userId);
 
         if (note == null) {
-            throw new IllegalArgumentException("Note does not exists");
+            throw new NoteNotFoundException("Note not found", noteId);
         }
 
         removeNoteOutputBoundary.removeNote(noteId);

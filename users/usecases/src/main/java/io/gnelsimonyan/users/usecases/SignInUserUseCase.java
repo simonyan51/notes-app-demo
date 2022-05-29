@@ -2,6 +2,7 @@ package io.gnelsimonyan.users.usecases;
 
 import io.gnelsimonyan.users.boundaries.output.SignInUserOutputBoundary;
 import io.gnelsimonyan.users.common.TokenManager;
+import io.gnelsimonyan.users.exceptions.UserNotFoundException;
 import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.input.SignInUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.input.params.SignInUserParams;
@@ -19,7 +20,7 @@ public class SignInUserUseCase implements SignInUserInputBoundary {
     private final TokenManager tokenManager;
 
     @Override
-    public String signIn(final SignInUserParams params) {
+    public String signIn(final SignInUserParams params) throws UserNotFoundException {
         Assert.notNull(params, "Sign In params must be provided");
         logger.trace("Signing up user by email {}", params.email());
 

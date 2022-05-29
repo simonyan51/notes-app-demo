@@ -7,6 +7,8 @@ import io.gnelsimonyan.notes.boundaries.output.SaveNoteOutputBoundary;
 import io.gnelsimonyan.notes.boundaries.output.TransactionManagerOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
+import io.gnelsimonyan.notes.exceptions.InvalidParameterException;
+import io.gnelsimonyan.notes.exceptions.NoteNotFoundException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +22,9 @@ public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
     private final TransactionManagerOutputBoundary transactionManager;
 
     @Override
-    public Note updateUserNote(final Long noteId, final SaveUserNoteParams saveUserNoteParams) {
+    public Note updateUserNote(final Long noteId, final SaveUserNoteParams saveUserNoteParams)
+            throws NoteNotFoundException,
+            InvalidParameterException {
         Assert.notNull(noteId, "noteId must be provided");
         Assert.notNull(saveUserNoteParams, "saveNoteParams must be provided");
 
@@ -30,13 +34,13 @@ public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
                 .execute(() -> updateUserNoteTransaction(noteId, saveUserNoteParams));
     }
 
-    private Note updateUserNoteTransaction(final Long noteId, final SaveUserNoteParams saveUserNoteParams) {
+    private Note updateUserNoteTransaction(final Long noteId, final SaveUserNoteParams saveUserNoteParams) throws NoteNotFoundException {
         logger.trace("Updating note by id {} with params: {}", noteId, saveUserNoteParams);
 
         Note note = findUserNoteOutputBoundary.findUserNote(noteId, saveUserNoteParams.userId());
 
         if (note == null) {
-            throw new IllegalArgumentException("Note does not exists");
+            throw new NoteNotFoundException("Note not found", noteId);
         }
 
         note.changeTitle(saveUserNoteParams.title());

@@ -1,5 +1,6 @@
 package io.gnelsimonyan.users.usecases;
 
+import io.gnelsimonyan.users.exceptions.UserNotFoundException;
 import io.gnelsimonyan.users.user.User;
 import io.gnelsimonyan.users.boundaries.input.FindUserInputBoundary;
 import io.gnelsimonyan.users.boundaries.output.FindUserOutputBoundary;
@@ -15,13 +16,13 @@ public class FindUserUseCase implements FindUserInputBoundary {
     private final FindUserOutputBoundary findUserOutputBoundary;
 
     @Override
-    public User findUserByEmail(final String email) {
+    public User findUserByEmail(final String email) throws UserNotFoundException {
         Assert.notEmpty(email, "Email must be provided");
         logger.trace("Fetching user by email {}", email);
 
         User user = findUserOutputBoundary.findUserByEmail(email);
 
-        if (user == null) throw new IllegalArgumentException("User not found");
+        if (user == null) throw new UserNotFoundException("User not found", email);
 
         logger.debug("Successfully fetched user by email {}", email);
         return user;

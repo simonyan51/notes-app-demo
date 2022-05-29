@@ -5,6 +5,8 @@ import io.gnelsimonyan.notes.boundaries.input.FindUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.RemoveUserNoteInputBoundary;
 import io.gnelsimonyan.notes.boundaries.input.UpdateUserNoteInputBoundary;
 import io.gnelsimonyan.notes.Note;
+import io.gnelsimonyan.notes.exceptions.InvalidParameterException;
+import io.gnelsimonyan.notes.exceptions.NoteNotFoundException;
 import io.gnelsimonyan.notes.rest.dtos.SaveNoteRequest;
 import io.gnelsimonyan.notes.rest.mappers.NoteDtoMapper;
 import io.gnelsimonyan.notes.rest.dtos.NoteResponse;
@@ -53,7 +55,7 @@ public class NoteEndpoint {
     public ResponseEntity<NoteResponse> getNote(
             @AuthenticationPrincipal(expression = "id") final Long userId,
             @PathVariable("id") final Long noteId
-    ) {
+    ) throws NoteNotFoundException {
         logger.info("Fetching user-{} note by id {}", userId, noteId);
 
         Note note = findUserNoteInputBoundary.findUserNote(noteId, userId);
@@ -69,7 +71,7 @@ public class NoteEndpoint {
             @RequestBody
             @Valid
             final SaveNoteRequest createNoteRequest
-    ) {
+    ) throws InvalidParameterException {
         logger.info("Creating user-{} note", userId);
 
         Note createdNote = createUserNoteInputBoundary.createUserNote(
@@ -87,7 +89,7 @@ public class NoteEndpoint {
             @RequestBody
             @Valid
             final SaveNoteRequest updateNoteRequest
-    ) {
+    ) throws InvalidParameterException, NoteNotFoundException {
         logger.info("Updating user-{} note by id {}", userId, noteId);
 
         Note updatedNote = updateUserNoteInputBoundary.updateUserNote(
@@ -103,7 +105,7 @@ public class NoteEndpoint {
     public ResponseEntity<?> deleteNote(
             @AuthenticationPrincipal(expression = "id") final Long userId,
             @PathVariable("id") final Long noteId
-    ) {
+    ) throws NoteNotFoundException {
         logger.info("Deleting user-{} note by id {}", userId, noteId);
 
         removeUserNoteInputBoundary.removeUserNote(noteId, userId);
