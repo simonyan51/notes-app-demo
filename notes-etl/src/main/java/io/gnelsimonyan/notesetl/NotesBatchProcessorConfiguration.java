@@ -1,9 +1,7 @@
 package io.gnelsimonyan.notesetl;
 
-import io.gnelsimonyan.notesetl.processors.json.NoteEntityToJSONProcessor;
 import io.gnelsimonyan.notesetl.source.NoteEntity;
 import io.gnelsimonyan.notesetl.source.NoteRepository;
-import io.gnelsimonyan.notesetl.writer.file.JSONObjectToParquetWriter;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,40 +12,45 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
-import org.springframework.batch.item.file.transform.PassThroughLineAggregator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.io.IOException;
 import java.util.Collections;
 
 @Configuration
 @EnableBatchProcessing
 @EnableJpaRepositories
-public class BatchProcessorConfig {
+public class NotesBatchProcessorConfiguration {
     private final int chunkSize;
+
     private final int pageSize;
+
     private final NoteRepository noteRepository;
+
     private final StepBuilderFactory stepBuilderFactory;
 
-    public BatchProcessorConfig(
+    private final ParameterizedJobExecutor parameterizedJobExecutor;
+
+    public NotesBatchProcessorConfiguration(
             @Value("${batch.chunk:10}")
             final int chunkSize,
             @Value("${batch.pageSize:1}")
             final int pageSize,
             final NoteRepository noteRepository,
-            final StepBuilderFactory stepBuilderFactory
+            final StepBuilderFactory stepBuilderFactory,
+            final ParameterizedJobExecutor parameterizedJobExecutor
     ) {
         this.chunkSize = chunkSize;
         this.pageSize = pageSize;
         this.noteRepository = noteRepository;
         this.stepBuilderFactory = stepBuilderFactory;
+        this.parameterizedJobExecutor = parameterizedJobExecutor;
     }
+
 
     @Bean
     RepositoryItemReader<NoteEntity> repositoryItemReader() {
@@ -61,70 +64,27 @@ public class BatchProcessorConfig {
     }
 
     @Bean
-    NoteEntityToJSONProcessor noteEntityToJSONProcessor() {
-        return new NoteEntityToJSONProcessor();
-    }
+    Step migrationStep() {
 
-    @Bean
-    FlatFileItemWriter<JSONObject> flatFileItemWriter() {
-        return new FlatFileItemWriterBuilder<JSONObject>()
-                .name("fileWriter")
-                .resource(new FileSystemResource("resources/notes-" + System.currentTimeMillis() + ".json"))
-                .lineAggregator(new PassThroughLineAggregator<>())
-                .build();
-    }
-
-    JSONObjectToParquetWriter jsonObjectToParquetWriter() {
-        return new JSONObjectToParquetWriter();
-    }
-
-    @Bean
-    Step jsonStep() {
         return stepBuilderFactory
-                .get("notesToJsonStep")
+                .get("notesMigrationStep")
                 .<NoteEntity, JSONObject>chunk(this.chunkSize)
                 .reader(repositoryItemReader())
-                .processor(noteEntityToJSONProcessor())
-                .writer(flatFileItemWriter())
+                .processor(parameterizedJobExecutor)
+                .writer(parameterizedJobExecutor)
                 .build();
     }
 
     @Bean
-    Step parquetStep() {
-        return stepBuilderFactory
-                .get("notesToParquetStep")
-                .<NoteEntity, JSONObject>chunk(this.chunkSize)
-                .reader(repositoryItemReader())
-                .processor(noteEntityToJSONProcessor())
-                .writer(jsonObjectToParquetWriter())
-                .build();
-    }
+    Job notesMigrationJob(JobRepository jobRepository, Step migrationStep) throws IOException {
 
-    @Bean
-    Job notesMigrationJob(JobRepository jobRepository) {
         return new JobBuilderFactory(jobRepository)
                 .get("notesProcessorJob")
                 .incrementer(new RunIdIncrementer())
-                .flow(parquetStep())
+                .flow(migrationStep)
                 .end()
                 .build();
 
+
     }
-
-//    @Bean
-//    Step parquetStep(
-//            RepositoryItemReader<NoteEntity> repositoryItemReader,
-//            NoteEntityToParquetProcessor noteEntityToParquetProcessor,
-//            StepBuilderFactory stepBuilderFactory
-//    ) {
-//        return stepBuilderFactory
-//                .get("parquetStep")
-//                .<NoteEntity, JSONObject>chunk(this.chunkSize)
-//                .reader(repositoryItemReader)
-//                .processor(noteEntityToParquetProcessor)
-//                .writer(null)
-//                .build();
-//    }
-
-
 }
