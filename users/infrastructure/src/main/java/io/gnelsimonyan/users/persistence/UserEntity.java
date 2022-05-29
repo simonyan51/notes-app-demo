@@ -14,22 +14,21 @@ import java.time.LocalDateTime;
 @Accessors(fluent = true)
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
-@Builder
 public class UserEntity {
     @Id
     @GeneratedValue
     private Long id;
-
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     @Column(name="email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
 }

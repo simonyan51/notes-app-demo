@@ -8,13 +8,16 @@ INSERT INTO users (
 ) VALUES (
   1,
   'test@example.com',
-  '$2a$12$.Qk1dr3xxP78apUhQAnGG.yUe9KGmF3J7u6f4qvTodTi8o6SgAWQe'
+  '$2a$10$Fr50gztVCcmfSb.9kfWtyulC0x9W12KrTmBacHWRRLBWfg/Tije7y',
+  '2022-05-28T22:08:44.553Z'
 ), (
   2,
   'test1@example.com',
-  '$2a$12$.Qk1dr3xxP78apUhQAnGG.yUe9KGmF3J7u6f4qvTodTi8o6SgAWQe'
+  '$2a$10$Fr50gztVCcmfSb.9kfWtyulC0x9W12KrTmBacHWRRLBWfg/Tije7y',
+  '2022-05-28T22:08:44.553Z'
 ), (
   3,
   'test2@example.com',
-  '$2a$12$.Qk1dr3xxP78apUhQAnGG.yUe9KGmF3J7u6f4qvTodTi8o6SgAWQe'
+  '$2a$10$Fr50gztVCcmfSb.9kfWtyulC0x9W12KrTmBacHWRRLBWfg/Tije7y',
+  '2022-05-28T22:08:44.553Z'
 );
