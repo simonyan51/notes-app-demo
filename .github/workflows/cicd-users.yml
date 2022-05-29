@@ -6,9 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
-
 env:
+  AWS_REGION: us-east-1        
   ECR_REPOSITORY: test-notes-users-app
+  ECS_SERVICE: test-notes-users-app-ms-svc               
+  ECS_CLUSTER: test-notes-users-app
+  ECS_TASK_DEFINITION: deployment/users/task-definition.json
+  CONTAINER_NAME: test-notes-users-app-ms-container  
 
 jobs:
 
@@ -34,7 +38,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr

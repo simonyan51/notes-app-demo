@@ -16,7 +16,7 @@
       ],
       "command": null,
       "linuxParameters": null,
-      "cpu": 0,
+      "cpu": 2,
       "environment": [
         {
           "name": "USERS_HOST",
@@ -72,7 +72,7 @@
     }
   ],
   "placementConstraints": [],
-  "memory": "500",
+  "memory": "1000",
   "taskRoleArn": null,
   "compatibilities": [
     "EXTERNAL",
@@ -106,7 +106,7 @@
   ],
   "networkMode": null,
   "runtimePlatform": null,
-  "cpu": "1024",
+  "cpu": "2048",
   "revision": 2,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
