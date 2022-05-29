@@ -8,9 +8,12 @@ import io.gnelsimonyan.notes.boundaries.output.TransactionManagerOutputBoundary;
 import io.gnelsimonyan.notes.common.Assert;
 import io.gnelsimonyan.notes.Note;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @AllArgsConstructor
 public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
+    private final Logger logger = LoggerFactory.getLogger(UpdateUserNoteUseCase.class);
 
     private final FindUserNoteOutputBoundary findUserNoteOutputBoundary;
     private final SaveNoteOutputBoundary saveNoteOutputBoundary;
@@ -28,6 +31,8 @@ public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
     }
 
     private Note updateUserNoteTransaction(final Long noteId, final SaveUserNoteParams saveUserNoteParams) {
+        logger.trace("Updating note by id {} with params: {}", noteId, saveUserNoteParams);
+
         Note note = findUserNoteOutputBoundary.findUserNote(noteId, saveUserNoteParams.userId());
 
         if (note == null) {
@@ -37,6 +42,9 @@ public class UpdateUserNoteUseCase implements UpdateUserNoteInputBoundary {
         note.changeTitle(saveUserNoteParams.title());
         note.changeText(saveUserNoteParams.text());
 
-        return saveNoteOutputBoundary.saveNote(note);
+        note = saveNoteOutputBoundary.saveNote(note);
+
+        logger.debug("Successfully saved note by id {} with params: {}",noteId, saveUserNoteParams);
+        return note;
     }
 }

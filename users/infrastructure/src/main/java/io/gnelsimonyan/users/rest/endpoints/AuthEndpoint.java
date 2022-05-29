@@ -8,6 +8,8 @@ import io.gnelsimonyan.users.rest.endpoints.dtos.UserResponse;
 import io.gnelsimonyan.users.rest.mappers.UserDtoMapper;
 import io.gnelsimonyan.users.user.User;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 @RequestMapping("v1/auth")
 @AllArgsConstructor
 public class AuthEndpoint {
+    private final Logger logger = LoggerFactory.getLogger(AuthEndpoint.class);
 
     private final SignInUserInputBoundary signInUserInputBoundary;
 
@@ -26,11 +29,13 @@ public class AuthEndpoint {
 
     @PostMapping("sign-in")
     public ResponseEntity<JwtTokenResponse> signIn(@RequestBody @Valid SignInRequest signInParamsRequest) {
+        logger.info("Sign up user by email {}", signInParamsRequest.email());
 
         String accessToken = signInUserInputBoundary.signIn(
                 UserDtoMapper.mapSignInUserParamsRequestToSignInUserParams(signInParamsRequest)
         );
 
+        logger.debug("User with email {} signed up successfully", signInParamsRequest.email());
         return ResponseEntity.ok(
                 JwtTokenResponse.of(accessToken)
         );
@@ -38,8 +43,11 @@ public class AuthEndpoint {
 
     @GetMapping("info")
     public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserDetails principal) {
+        logger.info("Getting user credentials by email {}", principal.getUsername());
+
         User user = findUserInputBoundary.findUserByEmail(principal.getUsername());
 
+        logger.debug("User with email {} credentials received successfully", principal.getUsername());
         return ResponseEntity.ok(UserDtoMapper.mapUserToUserResponse(user));
     }
 }

@@ -15,3 +15,7 @@ spring:
 users:
   host: 127.0.0.1
   port: 9000
+
+logging:
+  level:
+    root: INFO
