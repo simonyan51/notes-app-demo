@@ -11,7 +11,7 @@ env:
   ECR_REPOSITORY: test-notes-app        
   ECS_SERVICE: test-notes-app-ms-svc               
   ECS_CLUSTER: test-notes-app
-  ECS_TASK_DEFINITION: arn:aws:ecs:us-east-1:370651650070:task-definition/test-notes-app-ms:1 
+  ECS_TASK_DEFINITION: test-notes-app-ms:1
   CONTAINER_NAME: test-notes-app-ms-container  
 
 jobs:
@@ -40,7 +40,6 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
-        mask-aws-account-id: 'no'
 
     - name: Login to Amazon ECR
       id: login-ecr
