@@ -11,7 +11,7 @@ env:
   ECR_REPOSITORY: test-notes-app        
   ECS_SERVICE: test-notes-app-ms-svc               
   ECS_CLUSTER: test-notes-app
-  ECS_TASK_DEFINITION: test-notes-app-ms:1
+  ECS_TASK_DEFINITION: deployments/notes/task-definition.json
   CONTAINER_NAME: test-notes-app-ms-container  
 
 jobs:
