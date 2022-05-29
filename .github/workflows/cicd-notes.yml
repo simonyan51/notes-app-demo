@@ -6,6 +6,14 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  AWS_REGION: us-east-1        
+  ECR_REPOSITORY: test-notes-app        
+  ECS_SERVICE: test-notes-app-ms-svc               
+  ECS_CLUSTER: test-notes-app
+  ECS_TASK_DEFINITION: arn:aws:ecs:us-east-1:370651650070:task-definition/test-notes-app-ms:1 
+  CONTAINER_NAME: test-notes-app-ms-container  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,8 +39,8 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
-        mask-aws-account-id: no
+        aws-region: ${{ env.AWS_REGION }}
+        mask-aws-account-id: 'no'
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -42,7 +50,6 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: test-notes-app
         IMAGE_TAG: ${{ github.sha }}
       run: |
         cd notes/application
@@ -66,22 +73,22 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
         with:
-          task-definition: ${{ secrets.NOTES_APP_TASK_DEFINITION }}
-          container-name: ${{ secrets.NOTES_APP_CONTAINER_NAME }}
+          task-definition: ${{ env.NOTES_APP_TASK_DEFINITION }}
+          container-name: ${{ env.NOTES_APP_CONTAINER_NAME }}
           image: ${{ needs.build.outputs.build-image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@de0132cf8cdedb79975c6d42b77eb7ea193cf28e
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ secrets.NOTES_APP_SERVICE_NAME }}
-          cluster: ${{ secrets.NOTES_APP_CLUSTER_NAME }}
+          service: ${{ env.NOTES_APP_SERVICE_NAME }}
+          cluster: ${{ env.NOTES_APP_CLUSTER_NAME }}
           wait-for-service-stability: true
     
 
