@@ -16,7 +16,7 @@
       ],
       "command": null,
       "linuxParameters": null,
-      "cpu": 2,
+      "cpu": 0,
       "environment": [
         {
           "name": "USERS_HOST",
@@ -51,7 +51,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "370651650070.dkr.ecr.us-east-1.amazonaws.com/test-notes-app:notes-app-fe1c5280b31b227c02dd974c867794489e8f8224",
+      "image": "370651650070.dkr.ecr.us-east-1.amazonaws.com/test-notes-app:3d5d546bbba5d8bfbdd182b887ede8192bc9dcf8",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -72,13 +72,13 @@
     }
   ],
   "placementConstraints": [],
-  "memory": "1000",
+  "memory": "2048",
   "taskRoleArn": null,
   "compatibilities": [
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:370651650070:task-definition/test-notes-app-ms:2",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:370651650070:task-definition/test-notes-app-ms:10",
   "family": "test-notes-app-ms",
   "requiresAttributes": [
     {
@@ -107,7 +107,7 @@
   "networkMode": null,
   "runtimePlatform": null,
   "cpu": "2048",
-  "revision": 2,
+  "revision": 10,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
