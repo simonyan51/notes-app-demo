@@ -76,7 +76,7 @@ Architecture:
 
 > For using deployed APIs, please extract envs.zip file. Inside of zip file are stored hosts of deployed Microservices. Use password provided in email message
 
-###Users Microservice:
+### Users Microservice:
 
 _**Sign In API:**_
 ```aidl
@@ -95,7 +95,7 @@ curl --location -g --request GET 'http://{users_host}/v1/auth/info' \
 --header 'Authorization: Bearer {sing_in_token}'
 ```
 
-###Notes Microservice:
+### Notes Microservice:
 
 * **Get User Notes API:**
 ```
