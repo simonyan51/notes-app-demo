@@ -1,13 +1,12 @@
 spring:
   batch:
-    job:
-      enabled: false
     jdbc:
       initialize-schema: always
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/notes
+    url: jdbc:postgresql://pg-test-notes-app.c05rouaiy1pi.us-east-1.rds.amazonaws.com:5432/notes
     username: postgres
-    password: postgres
+    password: A1a1a1$#
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -20,9 +19,6 @@ spring:
 logging:
   level:
     root: INFO
-
-server:
-  port: 8085
 
 parquet:
   path: "resources/notes.parquet"

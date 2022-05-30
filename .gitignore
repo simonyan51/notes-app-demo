@@ -7,7 +7,7 @@
 **/target/
 /bin/
 **/bin/
-
+envs*.json
 *.class
 .vscode
 .DS_Store

@@ -21,3 +21,4 @@ INSERT INTO users (
   '$2a$10$Fr50gztVCcmfSb.9kfWtyulC0x9W12KrTmBacHWRRLBWfg/Tije7y',
   '2022-05-28T22:08:44.553Z'
 );
+

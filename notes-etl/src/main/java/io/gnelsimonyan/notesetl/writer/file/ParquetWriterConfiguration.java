@@ -13,11 +13,11 @@ import java.io.IOException;
 import static org.apache.parquet.hadoop.ParquetFileWriter.Mode.OVERWRITE;
 import static org.apache.parquet.hadoop.metadata.CompressionCodecName.SNAPPY;
 
-//@Configuration
+@Configuration
 public class ParquetWriterConfiguration {
     @Bean
     NoteSchemaToParquetWriter noteSchemaToParquetWriter(ParquetWriter<NoteSchema> parquetWriter) {
-        return new NoteSchemaToParquetFileWriter(parquetWriter);
+        return new NoteSchemaToParquetWriterImpl(parquetWriter);
     }
 
     @Bean
