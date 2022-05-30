@@ -48,14 +48,14 @@ Architecture:
 
 > In this task, a lot of technologies, which I am not familiar with them, so I tried to integrate them, and in my opinion here is a lot of improvements should be done, I want to count down the followings:
 
-###Users and Notes Microservices:
+### Users and Notes Microservices:
 * Handle exceptions thrown by Spring Security
 * Customize Default API responses
 * Create **Core** package for common classes
 * Write Unit tests
 * Integrate Swagger
 
-###Notes ETL:
+### Notes ETL:
 * Dive deep into ETL processing technologies
 * Write more abstract implementation batch processing (you can check branch **abstract-factory-implementation-for-notes-etl**)
 * Integrate Docker
@@ -63,11 +63,11 @@ Architecture:
 * Integrate with Amazon S3
 * Implement Triggers for batch processing
 
-###Infrastructure:
+### Infrastructure:
 * Learn more about AWS and setup secure environment
 * Reduce duplications in GitHub Actions workflows
 
-###The Most Challenging Parts
+### The Most Challenging Parts
 * Spring Security: I tried to create separate Authorization server, but based on time estimation, I decided to use JWT auth
 * AWS
 * Spring Batch (Apache Parquet)
@@ -142,22 +142,22 @@ curl --location -g --request DELETE 'http://{notes_host}/v1/notes/{id}' \
 
 # Installation
 
-###Step 1:
+### Step 1:
 ```aidl
 If you are want to use deployed version, extract ZIP file and use APIs for testing
 ```
 
-###Step 2:
+### Step 2:
 ```aidl
 If you want to use locally, Extract ZIP file and put database credentials in application.yml file
 ```
 
-###Step 3
+### Step 3
 ```aidl
 sh ./build-service.sh
 ```
 
-###Step 4
+### Step 4
 ```aidl
 docker-compose up
 ```
